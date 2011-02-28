@@ -79,6 +79,57 @@ if (!empty($this->data)) {
 
 }
 
+function add_ajax()
+{
+$this->layout = 'ajax';
+
+$user = $this->Session->read('Auth.User.username');
+$role = $this->Session->read('Auth.User.role');
+$this->set('user',$user);
+
+if (!empty($this->data)) { 
+
+	
+	$nhc = $this->data['Patient']['nhc'];
+	$check_nhc = $this->Patient->find('count', array('conditions' => array('Patient.nhc' => $nhc)));
+	 
+	
+	
+	if($check_nhc != 0 && $nhc != 0)
+	{
+	
+	$patient_id = $this->Patient->field('id', array('Patient.nhc' => $nhc));
+	$this->Patient->id = $patient_id;
+	$patient_name = $this->Patient->field('nombre');
+	$patient_apellido1 = $this->Patient->field('apellido1');
+	$patient_apellido2 = $this->Patient->field('apellido2');
+	$patient_nacimiento = $this->Patient->field('nacimiento');
+	$patient_madre = $this->Patient->field('madre');
+	
+	$this->set('newpatient', 0);
+	$this->set('patient_id', $patient_id);
+	$this->set('patient_name', $patient_name);
+	$this->set('patient_apellido1', $patient_apellido1);
+	$this->set('patient_apellido2', $patient_apellido2);
+	$this->set('patient_nacimiento', $patient_nacimiento);
+	$this->set('patient_madre', $patient_madre);
+	
+	
+	}
+	
+	else
+	{
+	$this->set('newpatient', 1);
+	}
+	
+	
+
+
+}
+
+
+}
+
 function view($id = null)
 {
 
