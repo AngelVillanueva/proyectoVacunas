@@ -6,6 +6,7 @@ class Patient extends AppModel
 
 	var $name = 'Patient';
 	var $hasMany = 'Vaccinations';
+	var $cacheQueries = false;
 	
 	var $validate = array(
 			'nhc' => array (

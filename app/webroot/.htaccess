@@ -1,6 +1,35 @@
+
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 </IfModule>
+
+# BEGIN Expires
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresDefault "access plus 10 years"
+ExpiresByType text/javascript "access plus 10 years"
+ExpiresByType text/css "access plus 10 years"
+ExpiresByType image/gif "access plus 10 years"
+ExpiresByType image/jpg "access plus 10 years"
+ExpiresByType image/jpeg "access plus 10 years"
+ExpiresByType image/png "access plus 10 years"
+ExpiresByType image/x-icon "access plus 10 years"
+## no funciona con favicon?
+</IfModule>
+# END Expires
+
+
+# BEGIN Gzip
+<FilesMatch "\.(js|css|html|htm|php|xml)$"> 
+SetOutputFilter DEFLATE
+</FilesMatch>
+# END Gzip
+
+# BEGIN ETags
+FileETag None
+## no funciona con favicon?
+# END ETags

@@ -8,8 +8,12 @@ var $paginate = array('fields' => array('Situation.id', 'Situation.vaccination_i
 
 
 function beforeFilter() {
-    
-     $this->Auth->allow('index');
+	
+    $this->Auth->loginError = 'El nombre de usuario y/o la contraseña no son correctos';
+    $this->Auth->authError = 'La sesión ha caducado. Por favor, identifíquese para acceder';
+    $this->Auth->loginRedirect = array('controller' => 'vaccinations', 'action' => 'index');
+    $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
+    $this->Auth->allow('');
      
      }
 

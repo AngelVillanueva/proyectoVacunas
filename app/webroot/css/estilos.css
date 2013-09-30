@@ -1,0 +1,836 @@
+/**
+ *
+ * Generic CSS for CakePHP
+ *
+ * mínimo
+ */
+
+
+
+/** containers **/
+div.form,
+div.index,
+div.view {
+	float:right;
+	width:76%;
+	border-left:1px solid #666;
+	padding:10px 2%;
+}
+div.actions {
+	float:left;
+	width:16%;
+	padding:10px 1.5%;
+}
+div.actions h3 {
+	padding-top:0;
+	color:#777;
+}
+
+
+/** Tables **/
+table {
+	background: #fff;
+	border-right:0;
+	clear: both;
+	color: #333;
+	margin-bottom: 10px;
+	width: 100%;
+}
+th {
+	border:0;
+	border-bottom:2px solid #555;
+	text-align: left;
+	padding:4px;
+}
+th a {
+	display: block;
+	padding: 2px 4px;
+	text-decoration: none;
+}
+th a.asc:after {
+	content: ' ⇣';
+}
+th a.desc:after {
+	content: ' ⇡';
+}
+table tr td {
+	background: #fff;
+	padding: 6px;
+	text-align: left;
+	vertical-align: top;
+	border-bottom:1px solid #ddd;
+}
+table tr:nth-child(2n) td {
+	background: #f5f5f5;
+}
+table .altrow td {
+	background: #f5f5f5;
+}
+td.actions {
+	text-align: center;
+	white-space: nowrap;
+}
+table td.actions a {
+	margin: 0px 6px;
+	padding:2px 5px;
+}
+.cake-sql-log table {
+	background: #f4f4f4;
+}
+.cake-sql-log td {
+	padding: 4px 8px;
+	text-align: left;
+	font-family: Monaco, Consolas, "Courier New", monospaced;
+}
+.cake-sql-log caption {
+	color:#fff;
+}
+
+/** Notices and Errors **/
+div.error-message {
+	clear: both;
+	color: #fff;
+	font-weight: bold;
+	background: #c73e14;
+}
+p.error {
+	background-color: #e32;
+	color: #fff;
+	font-family: Courier, monospace;
+	font-size: 120%;
+	line-height: 140%;
+	padding: 0.8em;
+	margin: 1em 0;
+}
+p.error em {
+	color: #000;
+	font-weight: normal;
+	line-height: 140%;
+}
+
+/**  Actions  **/
+input[type=submit],
+div.actions ul li a,
+td.actions a {
+	font-weight:normal;
+	padding: 4px 8px;
+	background:#e6e49f;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f1f1d4), to(#e6e49f));
+	background-image: -moz-linear-gradient(top, #f1f1d4, #e6e49f);
+	color:#333;
+	border:1px solid #aaac62;
+	-webkit-border-radius:8px;
+	-moz-border-radius:8px;
+	border-radius:8px;
+	text-decoration:none;
+	text-shadow: #fff 0px 1px 0px;
+	min-width: 0;
+}
+input[type=submit]:hover,
+div.actions ul li a:hover,
+td.actions a:hover {
+	background: #f0f09a;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f7f7e1), to(#eeeca9));
+}
+/********** **************/
+
+/** RESET **/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+margin : 0;
+padding : 0;
+border : 0;
+font-size : 100%;
+font : inherit;
+vertical-align : baseline; }
+
+a, a:active, a:hover, a:focus, a:visited, :active, :focus {
+outline: none; }
+
+a img {
+border: none; }
+
+li {
+list-style: none; }
+
+table { 
+border-collapse : collapse; 
+border-spacing : 0; }
+
+/* 1.BASICS */
+html {
+	overflow-y : scroll;
+	background : #FFFFFF;
+}
+body {
+	color: #444;
+	background-color: transparent;
+	font : 100%/1.5 sans-serif;
+}
+
+a, a:active {
+	color: #3399CC;
+	text-decoration: none;
+}
+
+a:hover {
+	border-bottom: 1px solid #DDDDDD;
+}
+h1 a:hover {
+	border: none;
+}
+/* 2.HEADINGS */
+
+h1, 
+h2, 
+h3, 
+h4, 
+h5, 
+h6 {
+font-family : 	Georgia,"Bitstream Vera Serif","Times New Roman",serif;
+}
+
+h1 { 
+margin-bottom : .75em;
+font-size : 3em; /* 48 / 16 = 3 */
+line-height : 1.2; }
+
+h2 { 
+margin-bottom : .75em;
+font-size : 2em; /* 36 / 16 = 2 */
+line-height : 1.2; }
+
+h3 { 
+margin-bottom : 1em;
+font-size : 1.5em; /* 24 / 16 = 1.5 */
+line-height : 1.3; }
+
+h4 { 
+margin-bottom : 1.25em;
+font-size : 1.25em; /* 20 / 16 = 1.25 */
+line-height : 1.25; }
+
+h5 { 
+margin-bottom : 1.5em;
+font-size : 1em; /* 16 / 16 = 1 */ }
+
+h6 { 
+font-size : 1em; /* 16 / 16 = 1 */ }
+
+/* 3.STRUCTURE */
+
+#header {
+	background: #F1F1F1;
+	height: 72px;
+	padding: 0 10px;
+}
+
+#headerwrapper, #bodywrapper, #footerwrapper {
+	max-width: 1450px;
+	min-width: 980px;
+	margin: 0 auto;
+}
+
+/* 4.DESIGN */
+/* 4.A.- HEADER */
+#header h1 {
+	background: none;
+	float: left;
+	font-size: 2em;
+	line-height: 2em;
+	margin-bottom: 0;
+	text-transform: uppercase;
+}
+
+#header a {
+	color: #3D7BA1;
+	padding-left: 20px;
+	text-decoration: none;
+}
+
+#header a img {
+	float: left;
+	height: 60px;
+	padding-top: 10px;
+	width: 86px;
+}
+
+#welcome {
+	color: #555;
+	float: right;
+	font-size: 0.8em;
+	margin-top: 2em;
+}
+.user {
+	padding-right: 20px;
+}
+
+#welcome a {
+	border-bottom: 1px solid;
+	padding-left: 0;
+}
+#welcome a:hover {
+	color: #f00;
+	border-color: #f00;
+}
+/* 4.B.- CONTENT */
+#content {
+	clear: both;
+	margin-left: 1em;
+	margin-top: 2em;
+}
+/* 4.C.- FOOTER */
+#footer {
+	clear: both;
+	padding: 6px 10px;
+	text-align: right;
+}
+
+#footer a {
+	color: #AAAAAA;
+	font-size: 0.6em;
+}
+
+/* 4.D.- FORMS */
+form {
+	clear: both;
+	margin-right: 20px;
+	padding: 0;
+	width: 95%;
+}
+#PatientAddForm {
+	position: relative;
+}
+fieldset {
+	border: 1px solid #ccc;
+	margin-bottom: 1em;
+	padding: 16px 20px;
+}
+fieldset legend {
+	background:#fff;
+	color: #e32;
+	font-size: 160%;
+	font-weight: bold;
+}
+fieldset fieldset {
+	margin-top: 0px;
+	margin-bottom: 20px;
+	padding: 16px 10px;
+}
+fieldset fieldset legend {
+	font-size: 120%;
+	font-weight: normal;
+}
+fieldset fieldset div {
+	clear: left;
+	margin: 0 20px;
+}
+form div {
+	background: #ECF6F9;
+	clear: both;
+	margin-bottom: 1em;
+	padding: 2em;
+	vertical-align: text-top;
+}
+#VaccinationReportForm div.jshow {
+	padding: 1.4em;
+	width: 35%;
+}
+form .required {
+	font-weight: bold;
+}
+form .required label {
+	position: relative;
+}
+form .required label:after {
+	color: #e32;
+	content: '*';
+	display:inline;
+}
+form .required label span.errorspan {
+	color:#c00;
+	font-size:0.7em;
+	font-weight:normal;
+	left: 2px;
+	position:absolute;
+	top: 2.2em;
+}
+input.form-error {
+	border-color: #c00;
+	margin-top: 2px;
+}
+#PatientNhc {
+	width: 85%;
+}
+div.submit {
+	background: none;
+	border: 0;
+	clear: both;
+	height: 2em;
+	margin-top: 10px;
+	padding-top: 0;
+	position: relative;
+}
+#falso {
+	position: absolute;
+	right: -1.5em;
+	#right: 0em;
+	top: 4.2em;
+	#padding: 0.5em;
+}
+div#falso input {
+	#padding: 0;
+	#width: 120px;
+}
+div#falso input:active, div.filtro input:active {
+	right: 1.8em;
+}
+label {
+	display: block;
+	font-size: 110%;
+	font-weight: bold;
+	margin-bottom:1em;
+}
+input, textarea {
+	border: 1px solid #C6D9E9;
+	color: #444;
+	clear: both;
+	font-size: 140%;
+	font-family: "frutiger linotype", "lucida grande", "verdana", sans-serif;
+	padding: 0.6em;
+	width:98%;
+}
+#falso input {
+	#padding: 0.3em;
+}
+select {
+	clear: both;
+	font-size: 120%;
+	vertical-align: text-bottom;
+}
+select[multiple=multiple] {
+	width: 100%;
+}
+option {
+	font-size: 120%;
+	padding: 0 3px;
+}
+input[type=checkbox] {
+	clear: left;
+	float: left;
+	margin: 0px 6px 7px 2px;
+	width: auto;
+}
+div.checkbox label {
+	display: inline;
+}
+input[type=radio] {
+	float:left;
+	width:auto;
+	margin: 0 3px 7px 0;
+}
+div.radio label {
+	margin: 0 0 6px 20px;
+}
+
+div.submit input, a.export {
+	border: 1px solid #ddd;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	box-shadow: 0 1px 2px rgba(61,123,161,0.2);
+	color: #fff;
+	cursor: pointer;
+	display: inline;
+	font-size: 110%;
+	text-shadow: 0 1px 2px rgba(221,235,241,0.3);
+	width: auto;
+	#filter:chroma(color=#000000);
+}
+
+a.export {
+	border-color: #99CC66;
+}
+
+div.submit input {
+	background: #018fd9;
+}
+
+#VaccinationReportForm div.submit input {
+	position: absolute;
+	right: -2em;
+	#right: -3em;
+}
+
+div.submit input:hover, a.export {
+	background:#4ca83d;
+	background: -webkit-gradient(linear, left top, left bottom, from(#85e573), to(#4ca83d));
+	background-image: -moz-linear-gradient(top, #85e573, #4ca83d);
+}
+a.export:hover {
+	background:#85E573;
+	/*background: -webkit-gradient(linear, left top, left bottom, from(#4ca83d), to(#416D3A));
+	background-image: -moz-linear-gradient(top, #4ca83d, #416D3A);*/
+}
+div.submit input:active {
+	position: absolute;
+	top: 1px;
+}
+div.submit input:focus {
+	outline: none;
+}
+
+.filtro {
+	background: none repeat scroll 0 0 #ECF6F9;
+	clear: right;
+    float: right;
+    font-size: 0.7em;
+    margin-bottom: 3em;
+    margin-right: 1em;
+    width: 50%;
+}
+.filtro p, .export p {
+	color: #21759B;
+	font-size: 1.1em;
+	padding: 1em;
+}
+.export p {
+	color: #4CA83D;
+	font-size: 0.77em;
+}
+.filtro div {
+	clear:none;
+	float: left;
+}
+.filtro div.submit {
+	margin-top: 4.4em;
+}
+.auto-label {
+	color: #bbb;
+	font-style: italic;
+}
+.formuno .elnhc, .formuno #falso {
+	display: none;
+}
+/* MENÚ INICIAL */
+
+#main-nav {
+	display: block;
+	height: 470px;
+	padding: 0 20px 20px;
+}
+li.level {
+	float: left;
+	margin: 1em;
+	width: 45%;
+}
+#main-nav a.main {
+	border-bottom: 1px solid;
+	font-family: Georgia,"Bitstream Vera Serif","Times New Roman",serif;
+	font-size: 1.5em;
+	position: relative;
+}
+a.main span {
+	background: #ECF6F9;
+	font-size: 0.5em;
+	padding: 5px 15px;
+	position: absolute;
+	right: 0.5em;
+	text-transform: uppercase;
+	top: 2.25em;
+}
+a.main:hover span {
+	background: #7bc4fd;
+	color: #fff;
+}
+#main-nav a {
+	cursor: pointer;
+	display: block;
+	margin-top: 30px;
+	padding: 20px;
+	text-decoration: none;
+}
+#main-nav a.main:hover, #main-nav li.current a.main {
+	background: #ECF6F9;
+	color: #3d7ba1;
+}
+#main-nav ul li a {
+	background: #f1f1f1;
+	color: #3d7ba1;
+	font-size: 1.25em;
+	margin-bottom: 2px;
+	margin-top: 0;
+	padding-bottom: 15px;
+}
+#main-nav ul li a:hover {
+	background: #7bc4fd;
+	color: #fff;
+}
+#main-nav ul li a.separator:hover {
+	background: grey;
+}
+#main-nav ul ul li a {
+	background: white;
+	border: 1px solid;
+	color: #3d7ba1;
+	font-size: 1em;
+	margin-bottom: 2px;
+	margin-top: 0;
+	padding-bottom: 15px;
+}
+#main-nav ul ul li a span {
+	color: gray;
+	display: block;
+	font-size: 0.8em;
+	text-align: right;
+}
+#main-nav ul ul li a:hover span {
+	color: #413c59;
+}
+
+/****************/
+
+/* TABLES */
+/** Tables **/
+
+
+
+/* TABLES AND PAGINATOR AND REPORT VIEW */
+#links {
+	height: 10em;
+}
+div.export {
+	background: none repeat scroll 0 0 #E8FFE2;
+    float: left;
+    padding-bottom: 7em;
+    #padding-bottom: 6em;
+    position: relative;
+    width: 42%;
+}
+.export a {
+    left: 28%;
+    padding: 4px 8px;
+    position: absolute;
+    top: 40%;
+}
+table {
+	font-size: 0.9em;
+	margin-bottom: 1em;
+	margin-top: 2em;
+}
+table#datos th {
+	min-width: 60px;
+}
+th a {
+	border-bottom: 1px solid #000;
+}
+th a:hover {
+	background: #018FD9 url('images/arrow-mini.png') no-repeat top right;
+	-moz-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	border-radius: 0.3em;
+	color: #fff;
+}
+table tr td.fecha {
+	font-size: 10px;
+}
+#paginator {
+	visibility: hidden;
+	float: right;
+	font-size: 0.7em;
+	margin: 0 1em 2em 1em;
+}
+#paginator span {
+	visibility: visible;
+}
+#paginator a, #paginator span.current {
+	padding: 0.5em;
+}
+#paginator a:hover {
+	background: #018FD9;
+	-moz-border-radius: 0.4em;
+	-webkit-border-radius: 0.4em;
+	border-radius: 0.4em;
+	color: #fff;
+}
+
+/* MESSAGES */
+.message {
+	background: #fef1ec;
+	border-color: #c73e14;
+	color: #c73e14;
+	border: 1px solid;
+	clear: both;
+	font-size: 140%;
+	margin: 0 0 1em 0;
+	padding: 5px 1em;
+	width: 95%;
+}
+.success, .notice {
+	border: 1px solid;
+	font-size: 120%;
+	font-weight: normal;
+	line-height: 140%;
+	margin: 0.5em 0 0;
+	padding: 0.5em;
+}
+.flash_failure, .notice {
+	background: #fef1ec;
+	border-color: #c73e14;
+	color: #c73e14;
+}
+.flash_success, .success {
+	background: #E8FFE2;
+	border-color: #4CA83D;
+	color: #4CA83D;
+}
+#loading {
+	height: 99%;
+	position: absolute;
+	top: 0px;
+	width: 99%;
+}
+#loading .img {
+	background: white;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	left: 40%;
+	padding: 20px;
+	position: absolute;
+	top: 10%;
+}
+#loading .bg {
+	background: none repeat scroll 0% 0% #F9F9F9;
+	height: 90%;
+	opacity: 0.5;
+	position: absolute;
+	top:0;
+	width: 90%;
+	display:none; /*al final lo quitamos (el background)*/
+}
+/* NON SEMANTIC HELPER CLASSES */
+
+/* Image replacement */
+.ir { 
+display : block; 
+text-indent : -999em; 
+overflow : hidden; 
+background-repeat : no-repeat; 
+text-align : left; 
+direction : ltr; }
+
+/* Hide for screenreaders and visual browsers */
+.hidden { 
+display : none; 
+visibility : hidden; }
+
+/* Hide visually */
+.visuallyhidden { 
+position : absolute;
+clip : rect(0 0 0 0); 
+overflow : hidden;
+margin: -1px;
+padding : 0;
+height : 1px;      
+width : 1px;
+border : 0; }
+
+/* Allow an element to be focusable via keyboard  */
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus { 
+position : static;
+clip : auto; 
+overflow : visible;
+height : auto; 
+margin : 0;   
+width : auto; }
+
+/* Hide but maintain layout */
+.invisible { 
+visibility : hidden; }
+
+/* Hide just when javascrip */
+.js .jhidden {
+	display: none;
+}
+.js .error-message, .js #tipoVacuna {
+	display: none;
+}
+/* Show just when javascript */
+.js jshow {
+	display: block;
+	visibility: visible;
+}
+
+/* Cambios 10noviembre 2011 */
+#welcome li {
+	float: left;
+	padding-left: 20px;
+}
+#welcome li.edit {
+	color: #f00;
+}
+div.go, div.gov {
+	display: none;
+	float: right;
+}
+#welcome div.go a, #welcome div.gov a {
+	background:#7BC4FD;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-ms-border-radius: 5px;
+	border-radius:5px;
+	color:#fff;
+	padding:5px;
+	text-transform:uppercase;
+}
+
+#welcome input {
+	color: #999;
+    font-size: 0.8em;
+    margin: 0.3em 1.5em;
+    width: auto;
+}
+#welcome .gov {
+	margin-right: 8em;
+}
+td.tableaction a {
+	font-size: 0.8em;
+}
+td.tableaction.delete a {
+	color: #f00;
+}
+/*** TESTS ***/
+.color azulclaro wp {
+		background: #7bc4fd;
+}
+#main-nav li a {
+	/*box-shadow: 0 1px 2px;*/
+}
+#main-nav a.main:hover, #main-nav li.current a.main {
+	/*background: #3D7BA1;
+	color: white;*/
+}
+#main-nav ul li a:hover {
+	/*padding: 30px;
+	margin-left: -20px;
+	margin-right: -20px;
+	text-transform: uppercase;*/
+}
+#main-nav ul li a {
+	/*background: #018FD9;
+	color: #fff;*/
+}

@@ -33,7 +33,7 @@
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-	Configure::write('debug', 2);
+	Configure::write('debug', 1);
 
 /**
  * CakePHP Log Level:
@@ -91,7 +91,7 @@
  * Turn off all caching application-wide.
  *
  */
-	//Configure::write('Cache.disable', true);
+	Configure::write('Cache.disable', true);
 
 /**
  * Enable cache checking.
@@ -102,7 +102,7 @@
  * or in each action using $this->cacheAction = true.
  *
  */
-	//Configure::write('Cache.check', true);
+	Configure::write('Cache.check', false);
 
 /**
  * Defines the default error type when using the log() function. Used for
@@ -124,7 +124,8 @@
  * the cake shell command: cake schema create Sessions
  *
  */
-	Configure::write('Session.save', 'php');
+	//Configure::write('Session.save', 'php');
+	Configure::write('Session.save', 'cake');
 
 /**
  * The model name to be used for the session model.
@@ -170,7 +171,7 @@
  * Session time out time (in seconds).
  * Actual value depends on 'Security.level' setting.
  */
-	Configure::write('Session.timeout', '120');
+	Configure::write('Session.timeout', '86400');
 
 /**
  * If set to false, sessions are not automatically started.
@@ -300,4 +301,4 @@
  *	));
  *
  */
-	Cache::config('default', array('engine' => 'File'));
+	//Cache::config('default', array('engine' => 'File'));

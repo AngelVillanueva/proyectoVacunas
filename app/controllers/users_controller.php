@@ -4,11 +4,17 @@ class UsersController extends AppController {
 
 	var $name = 'Users';
 	
-	function index(){}
+	function index(){
+	
+	}
 	
 	function beforeFilter() {
-	
-	      $this->Auth->allow('login', 'logout');
+		
+		$this->Auth->loginError = 'El nombre de usuario y/o la contraseña no son correctos';
+	    $this->Auth->authError = 'La sesión ha caducado. Por favor, identifíquese para acceder';
+	    $this->Auth->loginRedirect = array('controller' => 'vaccinations', 'action' => 'index');
+	    $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
+		$this->Auth->allow('login', 'logout');
 	      
 	    }
 	
@@ -40,14 +46,14 @@ class UsersController extends AppController {
 		
 		if(empty($this->data['User']['username']) || empty($this->data['User']['password']) || empty($this->data['User']['role'])){
 		
-		$this->Session->setFlash('Debe rellenar todos los campos!');
+		$this->Session->setFlash('Debe rellenar todos los campos!', 'flash_failure');
 		
 		}
 		
 		else
 		{
 		$this->User->save($this->data);
-		$this->Session->setFlash('Usuario guardado!');
+		$this->Session->setFlash('¡Usuario guardado!', 'flash_success');
 		$this->redirect(array('controller' => 'users', 'action' => 'add')); 
 		
 		}
