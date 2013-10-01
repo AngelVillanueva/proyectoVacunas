@@ -9,6 +9,9 @@
 <div class="export">
 <?php
 echo $html->link('Exportar el informe a PDF', array('controller' => 'vaccinations', 'action' => 'pdf',$id, $f_date, $s_date),array('class'=>'export'));
+if($id==2) {
+	echo $html->link('Exportar versión antigua', array('controller' => 'vaccinations', 'action' => 'pdf',6, $f_date, $s_date),array('style'=>'top:80%;'));
+}
 echo $this->Html->para(null, 'Exporte el resultado de su selección a PDF para su archivo, impresión o envío');
 ?>
 </div>
@@ -81,6 +84,16 @@ echo $this->Html->para(null, 'Exporte el resultado de su selección a PDF para s
 			);
 			$matrizModelos = array(
 				'Patient', 'Patient', 'Patient', 'Vaccine', 'Vaccination', 'Vaccine', 'Vaccine', 'Vaccine'
+			);
+			$matrizFechas = array(2, 4);
+		break;
+
+		case 6:
+			$matrizHeadings = array(
+				'Apellidos'=>'apellido1', 'Nombre'=>'nombre', 'F. nacimiento'=>'nacimiento', 'Enfermedad'=>'enfermedad', 'F. vacunación'=>'fecha', 'Dosis'=>'dosis', 'Vacuna'=>'nombre', 'Laboratorio'=>'laboratorio', 'Lote'=>'lote', 'Residente'=>'residente'
+			);
+			$matrizModelos = array(
+				'Patient', 'Patient', 'Patient', 'Vaccine', 'Vaccination', 'Vaccination', 'Vaccine', 'Vaccine', 'Vaccine', 'Situation'
 			);
 			$matrizFechas = array(2, 4);
 		break;

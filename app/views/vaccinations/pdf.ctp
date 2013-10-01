@@ -72,8 +72,8 @@ break;
 
 case 2:
 
-//INFORME DE TIPO 2 (Calendario Infantil obligatorio)
-// -------------------------------------------------------------
+//INFORME DE TIPO 2 (Calendario Infantil obligatorio) (nuevo oct2013)
+// ------------------------------------------------------------------
 $imgjunta = '<img src="img/LogoJCCCM.jpg" height="60" width="86" />';
 $blankimg = '<img src="'.K_BLANK_IMAGE.'" width="580" height="60" />';
 $imgsescam = '<img src="img/LogoSescam.png" height="60" width="70" />';
@@ -447,6 +447,225 @@ foreach($report_data as $vaccination) {
 $tabla
 EOD;
 	$tcpdf->writeHTML($html, true, false, false, false, '');
+}
+//--------------------------------------------------------------
+
+break;
+
+case 6:
+
+//INFORME DE TIPO 6 (Calendario Infantil obligatorio)[antiguo]
+// -------------------------------------------------------------
+$imgjunta = '<img src="img/LogoJCCCM.jpg" height="60" width="86" />';
+$blankimg = '<img src="'.K_BLANK_IMAGE.'" width="580" height="60" />';
+$imgsescam = '<img src="img/LogoSescam.png" height="60" width="70" />';
+$tcpdf->writeHTML($imgjunta.$blankimg.$imgsescam, true, false, false, false, '');
+
+$title = '<p style="font-weight: bold; font-size: 40px; text-align: center; text-decoration: underline;">Hoja de declaración nominal de vacunaciones (Infantil)</p>';
+if($first_date && $second_date) {
+  $periodo = '<p>DE '.$first_date.' A '.$second_date.'</p>';
+} else $periodo = '';
+$subtitle = '<p><b>ZONA DE SALUD:</b> SANATORIO SANTA CRISTINA - <b>LOCALIDAD:</b> ALBACETE</p>'.$periodo.'<p></p>';
+$titulo = $title.$subtitle;
+$tcpdf->xfootertext = 'Página '.$tcpdf->getAliasNumPage().'/'.$tcpdf->getAliasNbPages();
+$tcpdf->writeHTML($titulo, true, false, false, false, '');
+
+$cabecera = '<tr style="background-color:#ECF6F9; font-size:7; font-weight: bold; text-align: center;"><th style="background-color:#FFFFFF" colspan="4" rowspan="2" width="190"></th><th width="35">0 meses</th><th width="35">1 mes</th><th width="84" colspan="2">2 meses</th><th width="84" colspan="2">4 meses</th><th width="84" colspan="2">6 meses</th><th width="56" colspan="2">15 meses</th><th width="84" colspan="2">18 meses</th><th width="72" colspan="2">6 años</th><th width="36">11 años</th></tr>';
+$cabecera = $cabecera.'<tr style="background-color:#ECF6F9; font-size:6; text-align: center;"><th>Hepatitis B</th><th>Hepatitis B</th><th>Polio-DTP-HiB</th><th>Meningitis C</th><th>Polio-DTP-HiB</th><th>Meningitis C</th><th>Polio-DTP-HiB</th><th>Hepatitis B</th><th>T. Vírica</th><th>Varicela</th><th>Polio-DTP-HiB</th><th>Meningitis C</th><th>DTP</th><th>Triple Vírica</th><th>Varicela</th></tr>';
+$fila = '';
+$actualizacionT = 0;
+
+foreach($report_data as $vaccination) {
+  //echo 'Normal: ';print_r($report_data);echo '<br />';//Sinapse
+    $nombre = $vaccination['Patient']['nombre'];
+    $apellido1 = $vaccination['Patient']['apellido1'];
+    $apellido2 = $vaccination['Patient']['apellido2'];
+    $nacimiento = date('d/m/y', strtotime($vaccination['Patient']['nacimiento']));
+    $fecha = date('d/m/y', strtotime($vaccination['Vaccination']['fecha']));
+    $actualizacion = $vaccination['Vaccination']['actualizacion'];
+    $dosis = $vaccination['Vaccination']['dosis'];
+    $enfermedad = $vaccination['Vaccine']['enfermedad'];
+    $laboratorio = $vaccination['Vaccine']['laboratorio'];
+    $lote = $vaccination['Vaccine']['lote'];
+    $residente = $vaccination['Situation']['residente'];if($residente == 0) {$residente = '<img src="img/checked.jpg" height="5" width="4" />';} else {$residente = '<img src="img/not-checked.jpg" height="4" width="4" />';}
+    $celda1 = ''; $celda2 = ''; $celda3 = ''; $celda4 = ''; $celda5 = ''; $celda6 = ''; $celda7 = ''; $celda8 = ''; $celda9 = ''; $celda9bis = ''; $celda10 = ''; $celda11 = ''; $celda12 = ''; $celda13 = ''; $celda14 = '';
+    $celda1b = ''; $celda2b = ''; $celda3b = ''; $celda4b = ''; $celda5b = ''; $celda6b = ''; $celda7b = ''; $celda8b = ''; $celda9b = ''; $celda9bisb = ''; $celda10b = ''; $celda11b = ''; $celda12b = ''; $celda13b = ''; $celda14b = '';
+    $celda1c = ''; $celda2c = ''; $celda3c = ''; $celda4c = ''; $celda5c = ''; $celda6c = ''; $celda7c = ''; $celda8c = ''; $celda9c = ''; $celda9bisc = ''; $celda10c = ''; $celda11c = ''; $celda12c = ''; $celda13c = ''; $celda14c = '';
+    $incluirFila = true;
+    
+    if($actualizacion != 1) {
+      if($dosis == '0 meses') {
+        $celda1 = $lote; $celda1b = $laboratorio; $celda1c = $fecha;
+      } elseif($dosis == '1 mes') {
+        $celda2 = $lote; $celda2b = $laboratorio; $celda2c = $fecha;
+      } elseif($dosis == '2 meses') {
+        if($enfermedad == 'Polio-DTP-HiB') {
+          $celda3 = $lote; $celda3b = $laboratorio; $celda3c = $fecha;
+        } elseif($enfermedad == 'Meningitis C') {
+          $celda4 = $lote; $celda4b = $laboratorio; $celda4c = $fecha;
+        } else $incluirFila = false;
+      } elseif($dosis == '4 meses') {
+        if($enfermedad == 'Polio-DTP-HiB') {
+          $celda5 = $lote; $celda5b = $laboratorio; $celda5c = $fecha;
+        } elseif($enfermedad == 'Meningitis C') {
+          $celda6 = $lote; $celda6b = $laboratorio; $celda6c = $fecha;
+        } else $incluirFila = false;
+      } elseif($dosis == '6 meses') {
+        if($enfermedad == 'Polio-DTP-HiB') {
+          $celda7 = $lote; $celda7b = $laboratorio; $celda7c = $fecha;
+        } elseif($enfermedad == 'Hepatitis B') {
+          $celda8 = $lote; $celda8b = $laboratorio; $celda8c = $fecha;
+        } else $incluirFila = false;
+      } elseif($dosis == '15 meses') {
+        if($enfermedad == 'Triple Vírica') {
+          $celda9 = $lote; $celda9b = $laboratorio; $celda9c = $fecha;
+          } elseif($enfermedad == 'Varicela') {
+            $celda9bis = $lote; $celda9bisb = $laboratorio; $celda9bisc = $fecha;
+          } else $incluirFila = false;
+      } elseif($dosis == '18 meses') {
+        if($enfermedad == 'Polio-DTP-HiB') {
+          $celda10 = $lote; $celda10b = $laboratorio; $celda10c = $fecha;
+        } elseif($enfermedad == 'Meningitis C') {
+          $celda11 = $lote; $celda11b = $laboratorio; $celda11c = $fecha;
+        } else $incluirFila = false;
+      } elseif($dosis == '6 años') {
+        if($enfermedad == 'DTP') {
+          $celda12 = $lote; $celda12b = $laboratorio; $celda12c = $fecha;
+        } elseif($enfermedad == 'Triple Vírica') {
+          $celda13 = $lote; $celda13b = $laboratorio; $celda13c = $fecha;
+        } else $incluirFila = false;
+      } elseif($dosis == '11 años') {
+        if($enfermedad == 'Varicela') {$celda14 = $lote; $celda14b = $laboratorio; $celda14c = $fecha;} else $incluirFila = false;
+      } else $incluirFila = false;
+    } else {
+      $actualizacionT ++;
+      $incluirFila = false;
+    }
+    
+    if($incluirFila) {
+    $fila = $fila.'<tr nobr="true" style="background-color:#F9F9F9; font-size:6;"><td style="font-size:5;text-align:center;" rowspan="3" width="25"><b>No Residente</b><br />'.$residente.'</td><td style="background-color:#ECF6F9;font-size:5;" width="50"><b>APELLIDOS</b></td><td width="65">'.$apellido1.' '.$apellido2.'</td><td style="background-color:#ECF6F9;font-size:5;" width="50"><b>LOTE</b></td>';
+      $fila = $fila.'<td width="35">'.$celda1.'</td><td width="35">'.$celda2.'</td><td width="42">'.$celda3.'</td><td width="42">'.$celda4.'</td><td width="42">'.$celda5.'</td><td width="42">'.$celda6.'</td><td width="42">'.$celda7.'</td><td width="42">'.$celda8.'</td><td width="28">'.$celda9.'</td><td width="28">'.$celda9bis.'</td><td width="42">'.$celda10.'</td><td width="42">'.$celda11.'</td><td width="36">'.$celda12.'</td><td width="36">'.$celda13.'</td><td width="36">'.$celda14.'</td></tr>';
+      $fila = $fila.'<tr style="font-size:6;"><td style="background-color:#ECF6F9;font-size:5;"><b>NOMBRE</b></td><td>'.$nombre.'</td><td style="background-color:#ECF6F9;font-size:5;"><b>LABORATORIO</b></td>';
+      $fila = $fila.'<td>'.$celda1b.'</td><td>'.$celda2b.'</td><td>'.$celda3b.'</td><td>'.$celda4b.'</td><td>'.$celda5b.'</td><td>'.$celda6b.'</td><td>'.$celda7b.'</td><td>'.$celda8b.'</td><td>'.$celda9b.'</td><td>'.$celda9bisb.'</td><td>'.$celda10b.'</td><td>'.$celda11b.'</td><td>'.$celda12b.'</td><td>'.$celda13b.'</td><td>'.$celda14b.'</td></tr>';
+      $fila = $fila.'<tr style="font-size:6;"><td style="background-color:#ECF6F9;font-size:4;"><b>FECHA NACIMIENTO</b></td><td>'.$nacimiento.'</td><td style="background-color:#ECF6F9;font-size:4;"><b>FECHA VACUNACIÓN</b></td>';
+      $fila = $fila.'<td>'.$celda1c.'</td><td>'.$celda2c.'</td><td>'.$celda3c.'</td><td>'.$celda4c.'</td><td>'.$celda5c.'</td><td>'.$celda6c.'</td><td>'.$celda7c.'</td><td>'.$celda8c.'</td><td>'.$celda9c.'</td><td>'.$celda9bisc.'</td><td>'.$celda10c.'</td><td>'.$celda11c.'</td><td>'.$celda12c.'</td><td>'.$celda13c.'</td><td>'.$celda14c.'</td></tr>';
+      }
+}
+
+$tabla = '<table style="font-size:8;" cellspacing="0" cellpadding="1" border="1"><thead>'.$cabecera.'</thead><tbody>'.$fila.'</tbody></table>';
+$html = <<<EOD
+$tabla
+EOD;
+//$html2 = $cabecera.'<br />f: '.$fila; echo $html2.'<br />';//Sinapse
+if($fila!='') {
+  $tcpdf->writeHTML($html, true, false, false, false, '');
+}
+
+if($actualizacionT > 0) {
+  $cabecera2 = '<tr style="background-color:#ECF6F9; font-size:7; font-weight: bold; text-align: center;"><th style="background-color:#FFFFFF" colspan="4" rowspan="2" width="190">ACTUALIZACIONES DE CALENDARIO</th><th width="189" colspan="7">1ª Dosis</th><th width="189" colspan="7">2ª Dosis</th><th width="96" colspan="4">3ª Dosis</th><th width="60" colspan="3">4ª Dosis</th><th width="36">5ª Dosis</th></tr>';
+  $cabecera2 = $cabecera2.'<tr style="background-color:#ECF6F9; font-size:6; text-align: center;"><th>Polio</th><th>DTP/Td</th><th>HiB</th><th>Hepatitis B</th><th style="font-size:5;">Meningitis C</th><th>T.Vírica</th><th>Varicela G. Riesgo</th><th>Polio</th><th>DTP/Td</th><th>HiB</th><th>Hepatitis B</th><th style="font-size:5;">Meningitis C</th><th>T.Vírica</th><th>Varicela G. Riesgo</th><th>Polio</th><th>DTP/Td</th><th>HiB</th><th>Hepatitis B</th><th>Polio</th><th>DTP</th><th>HiB</th><th>DTP</th></tr>';
+  $fila = '';
+  
+  foreach($report_data as $vaccination) {
+    //echo 'Act('.$actualizacionT.'): ';print_r($report_data);echo '<br />';//Sinapse
+      $nombre = $vaccination['Patient']['nombre'];
+      $apellido1 = $vaccination['Patient']['apellido1'];
+      $apellido2 = $vaccination['Patient']['apellido2'];
+      $nacimiento = date('d/m/y', strtotime($vaccination['Patient']['nacimiento']));
+      $fecha = date('d/m/y', strtotime($vaccination['Vaccination']['fecha']));
+      $actualizacion = $vaccination['Vaccination']['actualizacion'];
+      $dosis = $vaccination['Vaccination']['dosis'];
+      $enfermedad = $vaccination['Vaccine']['enfermedad'];
+      $laboratorio = $vaccination['Vaccine']['laboratorio'];
+      $lote = $vaccination['Vaccine']['lote'];
+      $residente = $vaccination['Situation']['residente'];if($residente == 0) {$residente = '<img src="img/checked.jpg" height="5" width="4" />';} else {$residente = '<img src="img/not-checked.jpg" height="4" width="4" />';}
+      $celda1 = ''; $celda2 = ''; $celda3 = ''; $celda4 = ''; $celda5 = ''; $celda6 = ''; $celda7 = ''; $celda8 = ''; $celda9 = ''; $celda10 = ''; $celda11 = ''; $celda12 = ''; $celda13 = ''; $celda14 = ''; $celda15 = ''; $celda16 = ''; $celda17 = ''; $celda18 = ''; $celda19 = ''; $celda20 = ''; $celda21 = ''; $celda22 = '';
+      $celda1b = ''; $celda2b = ''; $celda3b = ''; $celda4b = ''; $celda5b = ''; $celda6b = ''; $celda7b = ''; $celda8b = ''; $celda9b = ''; $celda10b = ''; $celda11b = ''; $celda12b = ''; $celda13b = ''; $celda14b = ''; $celda15b = ''; $celda16b = ''; $celda17b = ''; $celda18b = ''; $celda19b = ''; $celda20b = ''; $celda21b = ''; $celda22b = '';
+      $celda1c = ''; $celda2c = ''; $celda3c = ''; $celda4c = ''; $celda5c = ''; $celda6c = ''; $celda7c = ''; $celda8c = ''; $celda9c = ''; $celda10c = ''; $celda11c = ''; $celda12c = ''; $celda13c = ''; $celda14c = ''; $celda15c = ''; $celda16c = ''; $celda17c = ''; $celda18c = ''; $celda19c = ''; $celda20c = ''; $celda21c = ''; $celda22c = '';
+      $incluirFila = true;
+      
+      if($actualizacion == 1) {
+        if($dosis == '1ª dosis') {
+          //echo '<p>yes: '.$enfermedad.'</p>';//Sinapse
+          if($enfermedad == 'Polio') {
+            $celda1 = $lote; $celda1b = $laboratorio; $celda1c = $fecha;
+          } elseif($enfermedad == 'DTP/Td') {
+            $celda2 = $lote; $celda2b = $laboratorio; $celda2c = $fecha;
+          } elseif($enfermedad == 'HiB') {
+            $celda3 = $lote; $celda3b = $laboratorio; $celda3c = $fecha;
+          } elseif($enfermedad == 'Hepatitis B') {
+            //echo '<p>yes: '.$lote.'</p>';//Sinapse
+            $celda4 = $lote; $celda4b = $laboratorio; $celda4c = $fecha;
+          } elseif($enfermedad == 'Meningitis C') {
+            $celda5 = $lote; $celda5b = $laboratorio; $celda5c = $fecha;
+          } elseif($enfermedad == 'Triple Vírica') {
+            $celda6 = $lote; $celda6b = $laboratorio; $celda6c = $fecha;
+          } elseif($enfermedad == 'Varicela') {
+            $celda7 = $lote; $celda7b = $laboratorio; $celda7c = $fecha;
+          } else $incluirFila = false;
+        } elseif($dosis == '2ª dosis') {
+          if($enfermedad == 'Polio') {
+            $celda8 = $lote; $celda8b = $laboratorio; $celda8c = $fecha;
+          } elseif($enfermedad == 'DTP/Td') {
+            $celda9 = $lote; $celda9b = $laboratorio; $celda9c = $fecha;
+          } elseif($enfermedad == 'HiB') {
+            $celda10 = $lote; $celda10b = $laboratorio; $celda10c = $fecha;
+          } elseif($enfermedad == 'Hepatitis B') {
+            $celda11 = $lote; $celda11b = $laboratorio; $celda11c = $fecha;
+          } elseif($enfermedad == 'Meningitis C') {
+            $celda12 = $lote; $celda12b = $laboratorio; $celda12c = $fecha;
+          } elseif($enfermedad == 'Triple Vírica') {
+            $celda13 = $lote; $celda13b = $laboratorio; $celda13c = $fecha;
+          } elseif($enfermedad == 'Varicela') {
+            $celda14 = $lote; $celda14b = $laboratorio; $celda14c = $fecha;
+          } else $incluirFila = false;
+        } elseif($dosis == '3ª dosis') {
+          if($enfermedad == 'Polio') {
+            $celda15 = $lote; $celda15b = $laboratorio; $celda15c = $fecha;
+          } elseif($enfermedad == 'DTP/Td') {
+            $celda16 = $lote; $celda16b = $laboratorio; $celda16c = $fecha;
+          } elseif($enfermedad == 'HiB') {
+            $celda17 = $lote; $celda17b = $laboratorio; $celda17c = $fecha;
+          } elseif($enfermedad == 'Hepatitis B') {
+            $celda18 = $lote; $celda18b = $laboratorio; $celda18c = $fecha;
+          }  else $incluirFila = false;
+        } elseif($dosis == '4ª dosis') {
+          if($enfermedad == 'Polio') {
+            $celda19 = $lote; $celda19b = $laboratorio; $celda19c = $fecha;
+          } elseif($enfermedad == 'DTP') {
+            $celda20 = $lote; $celda20b = $laboratorio; $celda20c = $fecha;
+          } elseif($enfermedad == 'HiB') {
+            $celda21 = $lote; $celda21b = $laboratorio; $celda21c = $fecha;
+          } else $incluirFila = false;
+        } elseif($dosis == '5ª dosis') {
+          if($enfermedad == 'DTP') {
+            $celda22 = $lote; $celda22b = $laboratorio; $celda22c = $fecha;
+          } else $incluirFila = false;
+        } else $incluirFila = false;
+      } else {
+        $incluirFila = false;
+      }
+      
+      //echo '<p>yes: '.$incluirFila.'</p>';//Sinapse
+      
+      if($incluirFila) {
+        $fila = $fila.'<tr nobr="true" style="background-color:#F9F9F9; font-size:6;"><td style="font-size:5;text-align:center;" rowspan="3" width="25"><b>No Residente</b><br />'.$residente.'</td><td style="background-color:#ECF6F9;font-size:5;" width="50"><b>APELLIDOS</b></td><td width="65">'.$apellido1.' '.$apellido2.'</td><td style="background-color:#ECF6F9;font-size:5;" width="50"><b>LOTE</b></td>';
+        $fila = $fila.'<td width="27">'.$celda1.'</td><td width="27">'.$celda2.'</td><td width="27">'.$celda3.'</td><td width="27">'.$celda4.'</td><td width="27">'.$celda5.'</td><td width="27">'.$celda6.'</td><td width="27">'.$celda7.'</td><td width="27">'.$celda8.'</td><td width="27">'.$celda9.'</td><td width="27">'.$celda10.'</td><td width="27">'.$celda11.'</td><td width="27">'.$celda12.'</td><td width="27">'.$celda13.'</td><td width="27">'.$celda14.'</td><td width="24">'.$celda15.'</td><td width="24">'.$celda16.'</td><td width="24">'.$celda17.'</td><td width="24">'.$celda18.'</td><td width="20">'.$celda19.'</td><td width="20">'.$celda20.'</td><td width="20">'.$celda21.'</td><td width="36">'.$celda22.'</td></tr>';
+        $fila = $fila.'<tr style="font-size:6;"><td style="background-color:#ECF6F9;font-size:5;"><b>NOMBRE</b></td><td>'.$nombre.'</td><td style="background-color:#ECF6F9;font-size:5;"><b>LABORATORIO</b></td>';
+        $fila = $fila.'<td>'.$celda1b.'</td><td>'.$celda2b.'</td><td>'.$celda3b.'</td><td>'.$celda4b.'</td><td>'.$celda5b.'</td><td>'.$celda6b.'</td><td>'.$celda7b.'</td><td>'.$celda8b.'</td><td>'.$celda9b.'</td><td>'.$celda10b.'</td><td>'.$celda11b.'</td><td>'.$celda12b.'</td><td>'.$celda13b.'</td><td>'.$celda14b.'</td><td>'.$celda15b.'</td><td>'.$celda16b.'</td><td>'.$celda17b.'</td><td>'.$celda18b.'</td><td>'.$celda19b.'</td><td>'.$celda20b.'</td><td>'.$celda21b.'</td><td>'.$celda22b.'</td></tr>';
+        $fila = $fila.'<tr style="font-size:6;"><td style="background-color:#ECF6F9;font-size:4;"><b>FECHA NACIMIENTO</b></td><td>'.$nacimiento.'</td><td style="background-color:#ECF6F9;font-size:4;"><b>FECHA VACUNACIÓN</b></td>';
+        $fila = $fila.'<td>'.$celda1c.'</td><td>'.$celda2c.'</td><td>'.$celda3c.'</td><td>'.$celda4c.'</td><td>'.$celda5c.'</td><td>'.$celda6c.'</td><td>'.$celda7c.'</td><td>'.$celda8c.'</td><td>'.$celda9c.'</td><td>'.$celda10c.'</td><td>'.$celda11c.'</td><td>'.$celda12c.'</td><td>'.$celda13c.'</td><td>'.$celda14c.'</td><td>'.$celda15c.'</td><td>'.$celda16c.'</td><td>'.$celda17c.'</td><td>'.$celda18c.'</td><td>'.$celda19c.'</td><td>'.$celda20c.'</td><td>'.$celda21c.'</td><td>'.$celda22c.'</td></tr>';
+      }
+  }
+
+  $tabla2 = '<table nobr="true" style="font-size:8;" cellspacing="0" cellpadding="1" border="1"><thead>'.$cabecera2.'</thead><tbody>'.$fila.'</tbody></table>';
+$html = <<<EOD
+$tabla2
+EOD;
+//$html3 = $cabecera.'<br />f: '.$fila; echo $html3.'<br />';//Sinapse
+  if($fila!='') {
+    $tcpdf->writeHTML($html, true, false, false, false, '');
+  }
 }
 //--------------------------------------------------------------
 

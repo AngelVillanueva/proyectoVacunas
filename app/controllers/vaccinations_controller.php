@@ -120,6 +120,10 @@ function edit($id = null, $form_id = null)
 			$form_name = 'Infantiles fuera del calendario vacunal';
 			$this->set('form_name', $form_name);
 			break;
+		case 6:
+			$form_name = 'Calendario infantil obligatorio (antiguo)';
+			$this->set('form_name', $form_name);
+			break;
 	
 	}
 	
@@ -236,6 +240,13 @@ switch($id)
 		$report_name = 'Adultos (sin dosis)';
 		$this->set('report_name', $report_name);
 		$this->paginate = array('conditions' => array('Vaccination.id' => $list, 'Vaccination.adultos_sin_dosis ' => 1), 'limit' => 10, 'order' => 'Patient.apellido1 ASC');
+		$data = $this->paginate('Vaccination');
+		$this->set(compact('data'));
+		break;
+	case 6:
+		$report_name = 'Calendario infantil obligatorio (antiguo)';
+		$this->set('report_name', $report_name);
+		$this->paginate = array('conditions' => array('Vaccination.id' => $list, 'Vaccination.infantil ' => 1), 'limit' => 10, 'order' => 'Vaccination.id DESC');
 		$data = $this->paginate('Vaccination');
 		$this->set(compact('data'));
 		break;
@@ -552,6 +563,18 @@ switch($id)
 		$report_name = 'Adultos (sin dosis)';
 		$this->set('report_name', $report_name);
 		$this->set('report_data', $this->Vaccination->find('all',array('conditions' => array('Vaccination.id' => $list, 'Vaccination.adultos_sin_dosis' => 1), 'order' => 'Patient.apellido1 ASC')));
+		if($first_date && $second_date) {
+			$firstp_date = explode('-',$first_date); $firstp_date = implode('-', array_reverse($firstp_date));
+			$secondp_date = explode('-',$second_date); $secondp_date = implode('-', array_reverse($secondp_date));
+		} else {$firstp_date = ''; $secondp_date = '';}
+		$this->set('first_date', $firstp_date);
+		$this->set('second_date', $secondp_date);
+		break;
+
+	case 6:
+		$report_name = 'Calendario infantil obligatorio (antiguo)';
+		$this->set('report_name', $report_name);
+		$this->set('report_data', $this->Vaccination->find('all',array('conditions' => array('Vaccination.id' => $list, 'Vaccination.infantil' => 1), 'order' => 'Vaccination.id DESC')));
 		if($first_date && $second_date) {
 			$firstp_date = explode('-',$first_date); $firstp_date = implode('-', array_reverse($firstp_date));
 			$secondp_date = explode('-',$second_date); $secondp_date = implode('-', array_reverse($secondp_date));
