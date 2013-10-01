@@ -88,8 +88,8 @@ $titulo = $title.$subtitle;
 $tcpdf->xfootertext = 'Página '.$tcpdf->getAliasNumPage().'/'.$tcpdf->getAliasNbPages();
 $tcpdf->writeHTML($titulo, true, false, false, false, '');
 
-$cabecera = '<tr style="background-color:#ECF6F9; font-size:7; font-weight: bold; text-align: center;"><th style="background-color:#FFFFFF" colspan="4" rowspan="2" width="190"></th><th width="35">0 meses</th><th width="35">1 mes</th><th width="84" colspan="2">2 meses</th><th width="84" colspan="2">4 meses</th><th width="84" colspan="2">6 meses</th><th width="56" colspan="2">15 meses</th><th width="84" colspan="2">18 meses</th><th width="72" colspan="2">6 años</th><th width="36">11 años</th></tr>';
-$cabecera = $cabecera.'<tr style="background-color:#ECF6F9; font-size:6; text-align: center;"><th>Hepatitis B</th><th>Hepatitis B</th><th>Polio-DTP-HiB</th><th>Meningitis C</th><th>Polio-DTP-HiB</th><th>Meningitis C</th><th>Polio-DTP-HiB</th><th>Hepatitis B</th><th>T. Vírica</th><th>Varicela</th><th>Polio-DTP-HiB</th><th>Meningitis C</th><th>DTP</th><th>Triple Vírica</th><th>Varicela</th></tr>';
+$cabecera = '<tr style="background-color:#ECF6F9; font-size:7; font-weight: bold; text-align: center;"><th style="background-color:#FFFFFF" colspan="4" rowspan="2" width="190"></th><th width="32">0 meses</th><th width="32">1 mes</th><th width="72" colspan="2">2 meses</th><th width="72" colspan="2">4 meses</th><th width="70" colspan="2">6 meses</th><th width="66" colspan="2">12 meses</th><th width="36">18 meses</th><th width="36">4 años</th><th width="36">6 años</th><th width="40">11 años</th><th width="36">13-14 años</th><th width="40">14 años</th></tr>';
+$cabecera = $cabecera.'<tr style="background-color:#ECF6F9; font-size:6; text-align: center;"><th>Hepatitis B</th><th>Hepatitis B</th><th>Pentavalente</th><th>Meningitis C</th><th>Pentavalente</th><th>Meningitis C</th><th>Pentavalente</th><th>Hepatitis B</th><th>T. Vírica</th><th>Meningit. C</th><th>Pentavalente</th><th>Triple Vírica</th><th>Triple Bacteriana</th><th>Varicela</th><th>Difteria-T</th><th>Papiloma</th></tr>';
 $fila = '';
 $actualizacionT = 0;
 
@@ -106,9 +106,9 @@ foreach($report_data as $vaccination) {
     $laboratorio = $vaccination['Vaccine']['laboratorio'];
     $lote = $vaccination['Vaccine']['lote'];
     $residente = $vaccination['Situation']['residente'];if($residente == 0) {$residente = '<img src="img/checked.jpg" height="5" width="4" />';} else {$residente = '<img src="img/not-checked.jpg" height="4" width="4" />';}
-    $celda1 = ''; $celda2 = ''; $celda3 = ''; $celda4 = ''; $celda5 = ''; $celda6 = ''; $celda7 = ''; $celda8 = ''; $celda9 = ''; $celda9bis = ''; $celda10 = ''; $celda11 = ''; $celda12 = ''; $celda13 = ''; $celda14 = '';
-    $celda1b = ''; $celda2b = ''; $celda3b = ''; $celda4b = ''; $celda5b = ''; $celda6b = ''; $celda7b = ''; $celda8b = ''; $celda9b = ''; $celda9bisb = ''; $celda10b = ''; $celda11b = ''; $celda12b = ''; $celda13b = ''; $celda14b = '';
-    $celda1c = ''; $celda2c = ''; $celda3c = ''; $celda4c = ''; $celda5c = ''; $celda6c = ''; $celda7c = ''; $celda8c = ''; $celda9c = ''; $celda9bisc = ''; $celda10c = ''; $celda11c = ''; $celda12c = ''; $celda13c = ''; $celda14c = '';
+    $celda1 = ''; $celda2 = ''; $celda3 = ''; $celda4 = ''; $celda5 = ''; $celda6 = ''; $celda7 = ''; $celda8 = ''; $celda9 = ''; $celda9bis = ''; $celda10 = ''; $celda11 = ''; $celda12 = ''; $celda13 = ''; $celda14 = ''; $celda15 = '';
+    $celda1b = ''; $celda2b = ''; $celda3b = ''; $celda4b = ''; $celda5b = ''; $celda6b = ''; $celda7b = ''; $celda8b = ''; $celda9b = ''; $celda9bisb = ''; $celda10b = ''; $celda11b = ''; $celda12b = ''; $celda13b = ''; $celda14b = ''; $celda15b = '';
+    $celda1c = ''; $celda2c = ''; $celda3c = ''; $celda4c = ''; $celda5c = ''; $celda6c = ''; $celda7c = ''; $celda8c = ''; $celda9c = ''; $celda9bisc = ''; $celda10c = ''; $celda11c = ''; $celda12c = ''; $celda13c = ''; $celda14c = ''; $celda15c = '';
     $incluirFila = true;
     
     if($actualizacion != 1) {
@@ -117,43 +117,65 @@ foreach($report_data as $vaccination) {
 	    } elseif($dosis == '1 mes') {
 	    	$celda2 = $lote; $celda2b = $laboratorio; $celda2c = $fecha;
 	    } elseif($dosis == '2 meses') {
-	    	if($enfermedad == 'Polio-DTP-HiB') {
+	    	if($enfermedad == 'Pentavalente') {
 	    		$celda3 = $lote; $celda3b = $laboratorio; $celda3c = $fecha;
 	    	} elseif($enfermedad == 'Meningitis C') {
 	    		$celda4 = $lote; $celda4b = $laboratorio; $celda4c = $fecha;
 	    	} else $incluirFila = false;
 	    } elseif($dosis == '4 meses') {
-	    	if($enfermedad == 'Polio-DTP-HiB') {
+	    	if($enfermedad == 'Pentavalente') {
 	    		$celda5 = $lote; $celda5b = $laboratorio; $celda5c = $fecha;
 	    	} elseif($enfermedad == 'Meningitis C') {
 	    		$celda6 = $lote; $celda6b = $laboratorio; $celda6c = $fecha;
 	    	} else $incluirFila = false;
 	    } elseif($dosis == '6 meses') {
-	    	if($enfermedad == 'Polio-DTP-HiB') {
+	    	if($enfermedad == 'Pentavalente') {
 	    		$celda7 = $lote; $celda7b = $laboratorio; $celda7c = $fecha;
 	    	} elseif($enfermedad == 'Hepatitis B') {
 	    		$celda8 = $lote; $celda8b = $laboratorio; $celda8c = $fecha;
 	    	} else $incluirFila = false;
-	    } elseif($dosis == '15 meses') {
+	    } elseif($dosis == '12 meses') {
 	    	if($enfermedad == 'Triple Vírica') {
 	    		$celda9 = $lote; $celda9b = $laboratorio; $celda9c = $fecha;
-	    		} elseif($enfermedad == 'Varicela') {
+	    		} elseif($enfermedad == 'Meningitis C') {
 	    			$celda9bis = $lote; $celda9bisb = $laboratorio; $celda9bisc = $fecha;
 	    		} else $incluirFila = false;
 	    } elseif($dosis == '18 meses') {
-	    	if($enfermedad == 'Polio-DTP-HiB') {
+	    	if($enfermedad == 'Pentavalente') {
 	    		$celda10 = $lote; $celda10b = $laboratorio; $celda10c = $fecha;
-	    	} elseif($enfermedad == 'Meningitis C') {
-	    		$celda11 = $lote; $celda11b = $laboratorio; $celda11c = $fecha;
 	    	} else $incluirFila = false;
+      } elseif($dosis == '4 años') {
+        if($enfermedad == 'Triple Vírica') {
+          $celda11 = $lote; $celda11b = $laboratorio; $celda11c = $fecha;
+        } else $incluirFila = false;
 	    } elseif($dosis == '6 años') {
-	    	if($enfermedad == 'DTP') {
+	    	if($enfermedad == 'Triple Bacteriana') {
 	    		$celda12 = $lote; $celda12b = $laboratorio; $celda12c = $fecha;
-	    	} elseif($enfermedad == 'Triple Vírica') {
-	    		$celda13 = $lote; $celda13b = $laboratorio; $celda13c = $fecha;
 	    	} else $incluirFila = false;
-	    } elseif($dosis == '11 años') {
-	    	if($enfermedad == 'Varicela') {$celda14 = $lote; $celda14b = $laboratorio; $celda14c = $fecha;} else $incluirFila = false;
+	    } elseif($dosis == '11 años 1') {
+	    	if($enfermedad == 'Varicela') {
+          $celda13 = $lote; $celda13b = $laboratorio; $celda13c = $fecha." (1ªd)";
+        } else $incluirFila = false;
+      } elseif($dosis == '11 años 2') {
+        if($enfermedad == 'Varicela') {
+          $celda13 = $lote; $celda13b = $laboratorio; $celda13c = $fecha." (2ªd)";
+        } else $incluirFila = false;
+      } elseif($dosis == '13-14 años') {
+        if($enfermedad == 'Difteria-Tétanos') {
+          $celda14 = $lote; $celda14b = $laboratorio; $celda14c = $fecha;
+        } else $incluirFila = false;
+      } elseif($dosis == '14 años 1') {
+        if($enfermedad == 'Papiloma') {
+          $celda15 = $lote; $celda15b = $laboratorio; $celda15c = $fecha." (1ªd)";
+        } else $incluirFila = false;
+      } elseif($dosis == '14 años 2') {
+        if($enfermedad == 'Papiloma') {
+          $celda15 = $lote; $celda15b = $laboratorio; $celda15c = $fecha." (2ªd)";
+        } else $incluirFila = false;
+      } elseif($dosis == '14 años 3') {
+        if($enfermedad == 'Papiloma') {
+          $celda15 = $lote; $celda15b = $laboratorio; $celda15c = $fecha." (1ªd)";
+        } else $incluirFila = false;
 	    } else $incluirFila = false;
     } else {
     	$actualizacionT ++;
@@ -162,11 +184,11 @@ foreach($report_data as $vaccination) {
     
     if($incluirFila) {
 		$fila = $fila.'<tr nobr="true" style="background-color:#F9F9F9; font-size:6;"><td style="font-size:5;text-align:center;" rowspan="3" width="25"><b>No Residente</b><br />'.$residente.'</td><td style="background-color:#ECF6F9;font-size:5;" width="50"><b>APELLIDOS</b></td><td width="65">'.$apellido1.' '.$apellido2.'</td><td style="background-color:#ECF6F9;font-size:5;" width="50"><b>LOTE</b></td>';
-	    $fila = $fila.'<td width="35">'.$celda1.'</td><td width="35">'.$celda2.'</td><td width="42">'.$celda3.'</td><td width="42">'.$celda4.'</td><td width="42">'.$celda5.'</td><td width="42">'.$celda6.'</td><td width="42">'.$celda7.'</td><td width="42">'.$celda8.'</td><td width="28">'.$celda9.'</td><td width="28">'.$celda9bis.'</td><td width="42">'.$celda10.'</td><td width="42">'.$celda11.'</td><td width="36">'.$celda12.'</td><td width="36">'.$celda13.'</td><td width="36">'.$celda14.'</td></tr>';
+	    $fila = $fila.'<td width="32">'.$celda1.'</td><td width="32">'.$celda2.'</td><td width="36">'.$celda3.'</td><td width="36">'.$celda4.'</td><td width="36">'.$celda5.'</td><td width="36">'.$celda6.'</td><td width="35">'.$celda7.'</td><td width="35">'.$celda8.'</td><td width="33">'.$celda9.'</td><td width="33">'.$celda9bis.'</td><td width="36">'.$celda10.'</td><td width="36">'.$celda11.'</td><td width="36">'.$celda12.'</td><td width="40">'.$celda13.'</td><td width="36">'.$celda14.'</td><td width="40">'.$celda15.'</td></tr>';
 	    $fila = $fila.'<tr style="font-size:6;"><td style="background-color:#ECF6F9;font-size:5;"><b>NOMBRE</b></td><td>'.$nombre.'</td><td style="background-color:#ECF6F9;font-size:5;"><b>LABORATORIO</b></td>';
-	    $fila = $fila.'<td>'.$celda1b.'</td><td>'.$celda2b.'</td><td>'.$celda3b.'</td><td>'.$celda4b.'</td><td>'.$celda5b.'</td><td>'.$celda6b.'</td><td>'.$celda7b.'</td><td>'.$celda8b.'</td><td>'.$celda9b.'</td><td>'.$celda9bisb.'</td><td>'.$celda10b.'</td><td>'.$celda11b.'</td><td>'.$celda12b.'</td><td>'.$celda13b.'</td><td>'.$celda14b.'</td></tr>';
+	    $fila = $fila.'<td>'.$celda1b.'</td><td>'.$celda2b.'</td><td>'.$celda3b.'</td><td>'.$celda4b.'</td><td>'.$celda5b.'</td><td>'.$celda6b.'</td><td>'.$celda7b.'</td><td>'.$celda8b.'</td><td>'.$celda9b.'</td><td>'.$celda9bisb.'</td><td>'.$celda10b.'</td><td>'.$celda11b.'</td><td>'.$celda12b.'</td><td>'.$celda13b.'</td><td>'.$celda14b.'</td><td>'.$celda15b.'</td></tr>';
 	    $fila = $fila.'<tr style="font-size:6;"><td style="background-color:#ECF6F9;font-size:4;"><b>FECHA NACIMIENTO</b></td><td>'.$nacimiento.'</td><td style="background-color:#ECF6F9;font-size:4;"><b>FECHA VACUNACIÓN</b></td>';
-	    $fila = $fila.'<td>'.$celda1c.'</td><td>'.$celda2c.'</td><td>'.$celda3c.'</td><td>'.$celda4c.'</td><td>'.$celda5c.'</td><td>'.$celda6c.'</td><td>'.$celda7c.'</td><td>'.$celda8c.'</td><td>'.$celda9c.'</td><td>'.$celda9bisc.'</td><td>'.$celda10c.'</td><td>'.$celda11c.'</td><td>'.$celda12c.'</td><td>'.$celda13c.'</td><td>'.$celda14c.'</td></tr>';
+	    $fila = $fila.'<td>'.$celda1c.'</td><td>'.$celda2c.'</td><td>'.$celda3c.'</td><td>'.$celda4c.'</td><td>'.$celda5c.'</td><td>'.$celda6c.'</td><td>'.$celda7c.'</td><td>'.$celda8c.'</td><td>'.$celda9c.'</td><td>'.$celda9bisc.'</td><td>'.$celda10c.'</td><td>'.$celda11c.'</td><td>'.$celda12c.'</td><td>'.$celda13c.'</td><td>'.$celda14c.'</td><td>'.$celda15c.'</td></tr>';
 	    }
 }
 
