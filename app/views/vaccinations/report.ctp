@@ -10,7 +10,7 @@
 <?php
 echo $html->link('Exportar el informe a PDF', array('controller' => 'vaccinations', 'action' => 'pdf',$id, $f_date, $s_date),array('class'=>'export'));
 if($id==2) {
-	echo $html->link('Exportar versión antigua', array('controller' => 'vaccinations', 'action' => 'pdf',6, $f_date, $s_date),array('style'=>'top:80%;'));
+	echo $html->link('Exportar versión antigua', array('controller' => 'vaccinations', 'action' => 'pdf',6, $f_date, $s_date),array('style'=>'top:75%;'));
 }
 echo $this->Html->para(null, 'Exporte el resultado de su selección a PDF para su archivo, impresión o envío');
 ?>
