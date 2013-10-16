@@ -574,7 +574,7 @@ switch($id)
 	case 6:
 		$report_name = 'Calendario infantil obligatorio (antiguo)';
 		$this->set('report_name', $report_name);
-		$this->set('report_data', $this->Vaccination->find('all',array('conditions' => array('Vaccination.id' => $list, 'Vaccination.infantil' => 1), 'order' => 'Vaccination.id DESC')));
+		$this->set('report_data', $this->Vaccination->find('all',array('conditions' => array('Vaccination.id' => $list, 'Vaccination.infantil' => 1), 'order' => 'Vaccination.patient_id DESC')));
 		if($first_date && $second_date) {
 			$firstp_date = explode('-',$first_date); $firstp_date = implode('-', array_reverse($firstp_date));
 			$secondp_date = explode('-',$second_date); $secondp_date = implode('-', array_reverse($secondp_date));
