@@ -788,7 +788,7 @@ function calcula_edad($vaccination) {
 }
 
 function formatea_edad($edad) {
-  $edad_en_meses = ceil(($edad->format('%a') + 0) / 30);
+  $edad_en_meses = round(($edad->format('%a') + 0) / 30);
   $edad_en_meses == 1 ? $edad_en_meses .= ' mes' : $edad_en_meses .= ' meses';
   $edad_en_dias = $edad->format('%a') + 0;
   if($edad_en_dias < 365) {
@@ -820,7 +820,78 @@ function formatea_dosis($dosis, $vacuna) {
   if(in_array($dosis, $array_ok)) {
     $dosis_f = $dosis;
   } else {
-    $dosis_f = $dosis.'a';
+    $dosis_f = $dosis;
+    switch ($dosis) {
+      case '0 meses':
+        if($vacuna=='Hepatitis B') { $dosis_f = '1ª dosis'; }
+        break;
+      case 'Recién nacido':
+        if($vacuna=='Hepatitis B') { $dosis_f = '1ª dosis'; }
+        break;
+      case '1 mes':
+        if($vacuna=='Hepatitis B') { $dosis_f = '2ª dosis'; }
+        break;
+      case '2 meses':
+        $enfermedades = array('Polio-DTP-HiB', 'Pentavalente', 'Meningitis C');
+        if(in_array($vacuna, $enfermedades)) { $dosis_f = '1ª dosis'; }
+        break;
+      case '4 meses':
+        $enfermedades = array('Polio-DTP-HiB', 'Pentavalente', 'Meningitis C');
+        if(in_array($vacuna, $enfermedades)) { $dosis_f = '2ª dosis'; }
+        break;
+      case '6 meses':
+        $enfermedades = array('Polio-DTP-HiB', 'Pentavalente', 'Hepatitis B');
+        if(in_array($vacuna, $enfermedades)) { $dosis_f = '3ª dosis'; }
+        break;
+      case '12 meses':
+        if($vacuna == 'Meningitis C') {
+          $dosis_f = '3ª dosis';
+        } elseif($vacuna == 'Triple Vírica') { $dosis_f = '1ª dosis'; }
+        break;
+      case '15 meses':
+        $enfermedades = array('Triple Vírica', 'Varicela');
+        if(in_array($vacuna, $enfermedades)) { $dosis_f = '1ª dosis'; }
+        break;
+      case '18 meses':
+        $enfermedades = array('Polio-DTP-HiB', 'Pentavalente');
+        if($vacuna == 'Meningitis C') {
+          $dosis_f = '3ª dosis';
+        } elseif(in_array($vacuna, $enfermedades)) { $dosis_f = '4ª dosis'; }
+        break;
+      case '4 años':
+        if($vacuna == 'Triple Vírica') { $dosis_f = '2ª dosis'; }
+        break;
+      case '6 años':
+        $enfermedades = array('DTP', 'Triple Bacteriana');
+        if($vacuna == 'Triple Vírica') {
+          $dosis_f = '2ª dosis';
+        } elseif(in_array($vacuna, $enfermedades)) { $dosis_f = '1ª dosis'; }
+        break;
+      case '11 años':
+        if($vacuna == 'Varicela') { $dosis_f = '2ª dosis'; }
+        break;
+      case '11 años 1':
+        if($vacuna == 'Varicela') { $dosis_f = '1ª dosis'; }
+        break;
+      case '11 años 2':
+        if($vacuna == 'Varicela') { $dosis_f = '2ª dosis'; }
+        break;
+      case '13-14 años':
+        if($vacuna == 'Difteria-T') { $dosis_f = '1ª dosis'; }
+        break;
+      case '14 años 1':
+        if($vacuna == 'Papiloma') { $dosis_f = '1ª dosis'; }
+        break;
+      case '14 años 2':
+        if($vacuna == 'Papiloma') { $dosis_f = '2ª dosis'; }
+        break;
+      case '14 años 3':
+        if($vacuna == 'Papiloma') { $dosis_f = '3ª dosis'; }
+        break;
+      default:
+        $dosis_f = $dosis;
+        break;
+    }
   }
   return $dosis_f;
 }
