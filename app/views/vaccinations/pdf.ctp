@@ -711,7 +711,7 @@ $titulo = $title.$subtitle;
 $tcpdf->xfootertext = 'Página '.$tcpdf->getAliasNumPage().'/'.$tcpdf->getAliasNbPages();
 $tcpdf->writeHTML($titulo, true, false, false, false, '');
 
-$columnas = '<td style="background-color:#f6cece;">Fecha</td><td style="background-color:#f6cece;">Vacuna</td><td style="background-color:#f6cece;">Laboratorio</td><td style="background-color:#f6cece;">Lote</td><td style="background-color:#f6cece;">Dosis</td><td style="background-color:#f6cece;">Edad</td>';
+$columnas = '<td style="background-color:#f6cece;">Fecha vacuna</td><td style="background-color:#f6cece;">Vacuna</td><td style="background-color:#f6cece;">Laboratorio</td><td style="background-color:#f6cece;">Lote</td><td style="background-color:#f6cece;">Dosis</td><td style="background-color:#f6cece;">Edad</td>';
 $cabecera = '<tr style="font-weight:bold;"><td width="230" colspan="2" style="border-color:#fff;"></td><td colspan="6" style="background-color:#ECF6F9; font-weight:bold; text-align:center;">Vacunación</td><td width="50" style="border-color:#fff;"></td></tr>';
 $cabecera .= '<tr style="background-color:#ECF6F9; font-weight:bold;text-align:rigth;"><td width="160" style="text-align:left;">Paciente</td><td width="70" style="text-align:center;">Fecha nacimiento</td>'.$columnas.'<td width="50" style="text-align:center;">No residente</td></tr>';
 $fila = '';
@@ -721,8 +721,8 @@ foreach($report_data as $vaccination)
   {
     $repe = chequea_repetido($vaccination['Patient']['nhc'], $para_chequeo);
     $repe ? $paciente = "Idem" : $paciente = fullname($vaccination);
-    $repe ? $fecha_nac = "Idem" : $fecha_nac = $vaccination['Patient']['nacimiento'];
-    $fecha_vac = $vaccination['Vaccination']['fecha'];
+    $repe ? $fecha_nac = "Idem" : $fecha_nac = formato_fecha($vaccination['Patient']['nacimiento']);
+    $fecha_vac = formato_fecha($vaccination['Vaccination']['fecha']);
     $vacuna = $vaccination['Vaccine']['enfermedad'];
     $laboratorio = $vaccination['Vaccine']['laboratorio'];
     $lote = $vaccination['Vaccine']['lote'];
@@ -801,6 +801,11 @@ function formatea_residencia($situacion) {
 function chequea_repetido($nuevo, $anterior){
   $nuevo == $anterior ? $repetido = true : $repetido = false;
   return $repetido;
+}
+
+function formato_fecha($fecha) {
+  $fecha = date('d-m-Y', strtotime($fecha));
+  return $fecha;
 }
 
 ?>
