@@ -727,15 +727,10 @@ foreach($report_data as $vaccination)
     $laboratorio = $vaccination['Vaccine']['laboratorio'];
     $lote = $vaccination['Vaccine']['lote'];
     $dosis = $vaccination['Vaccination']['dosis'];
-    $edad = new DateTime($vaccination['Patient']['nacimiento']);
-    $now = new DateTime();
     $edad = calcula_edad($vaccination);
-    $edad_en_meses = ceil(($edad->format('%a') + 0) / 30)." meses";
-    $edad_p = $edad->format('%a')+0 >=365 ? $edad->format('%y años') : $edad_en_meses;
-    $residente = $vaccination['Situation']['residente'];
-    $noresidente = !$residente ? "x" : "";
+    $residencia = formatea_residencia($vaccination['Situation']['residente']);
 
-    $fila .= "<tr><td>".$paciente."</td><td>".$fecha_nac."</td><td>".$edad_p."</td><td>".$fecha_vac."</td></tr>";
+    $fila .= "<tr><td>".$paciente."</td><td>".$fecha_nac."</td><td>".$edad."</td><td>".$residencia."</td></tr>";
   }
 
 $tabla = '<table style="font-size:8;" cellspacing="0" cellpadding="1" border="1"><thead>'.$cabecera.'</thead><tbody>'.$fila.'</tbody></table>';
@@ -787,7 +782,19 @@ function calcula_edad($vaccination) {
   $nace = new DateTime($fecha_nacimiento);
   $vacunado = new DateTime($fecha_vacunacion);
   $edad = $nace->diff($vacunado);
-  return $edad;
+  $edad_formateada = formatea_edad($edad);
+  return $edad_formateada;
+}
+
+function formatea_edad($edad) {
+  $edad_en_meses = ceil(($edad->format('%a') + 0) / 30)." meses";
+  $edad_df = $edad->format('%a')+0 >=365 ? $edad->format('%y años') : $edad_en_meses;
+  return $edad_df;
+}
+
+function formatea_residencia($situacion) {
+  $no_residente = !$situacion ? "x" : "";
+  return $no_residente;
 }
 
 ?>
