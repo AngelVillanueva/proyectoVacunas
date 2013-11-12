@@ -788,8 +788,15 @@ function calcula_edad($vaccination) {
 }
 
 function formatea_edad($edad) {
-  $edad_en_meses = ceil(($edad->format('%a') + 0) / 30)." meses";
-  $edad_df = $edad->format('%a')+0 >=365 ? $edad->format('%y años') : $edad_en_meses;
+  $edad_en_meses = ceil(($edad->format('%a') + 0) / 30);
+  $edad_en_meses == 1 ? $edad_en_meses .= ' mes' : $edad_en_meses .= ' meses';
+  $edad_en_dias = $edad->format('%a') + 0;
+  if($edad_en_dias < 365) {
+    $edad_df = $edad_en_meses;
+  } else {
+    $edad_en_anhos = $edad->format('%y');
+    $edad_en_dias < 730 ? $edad_df = $edad_en_anhos.' año' : $edad_df = $edad_en_anhos.' años';
+  }
   return $edad_df;
 }
 
