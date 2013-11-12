@@ -715,8 +715,9 @@ $cabecera = '<tr style="background-color:#ECF6F9; font-size:7; font-weight: bold
 $cabecera = $cabecera.'<tr style="background-color:#ECF6F9; font-size:6; text-align: center;"><th>Hepatitis B</th><th>Hepatitis B</th><th>Polio-DTP-HiB</th><th>Meningitis C</th><th>Polio-DTP-HiB</th><th>Meningitis C</th><th>Polio-DTP-HiB</th><th>Hepatitis B</th><th>T. Vírica</th><th>Varicela</th><th>Polio-DTP-HiB</th><th>Meningitis C</th><th>DTP</th><th>Triple Vírica</th><th>Varicela</th></tr>';
 $fila = '';
 
-$columnas = '<th>Paciente</th><th>Fecha nacimiento</th><th>Vacunación</th><th>No residente</th>';
-$cabecera = '<tr style="background-color:#ECF6F9; font-weight:bold; text-align:center;">'.$columnas.'</tr>';
+$columnas = '<td style="background-color:#f6cece;">Fecha</td><td style="background-color:#f6cece;">Vacuna</td><td style="background-color:#f6cece;">Laboratorio</td><td style="background-color:#f6cece;">Lote</td><td style="background-color:#f6cece;">Dosis</td><td style="background-color:#f6cece;">Edad</td>';
+$cabecera = '<tr style="font-weight:bold;"><td width="230" colspan="2"></td><td colspan="6" style="background-color:#ECF6F9; font-weight:bold; text-align:center;">Vacunación</td><td width="50"></td></tr>';
+$cabecera .= '<tr style="background-color:#ECF6F9; font-weight:bold;text-align:rigth;"><td width="160" style="text-align:left;">Paciente</td><td width="70" style="text-align:center;">Fecha nacimiento</td>'.$columnas.'<td width="50" style="text-align:center;">No residente</td></tr>';
 
 foreach($report_data as $vaccination)
   {
@@ -730,7 +731,7 @@ foreach($report_data as $vaccination)
     $edad = calcula_edad($vaccination);
     $residencia = formatea_residencia($vaccination['Situation']['residente']);
 
-    $fila .= "<tr><td>".$paciente."</td><td>".$fecha_nac."</td><td>".$edad."</td><td>".$residencia."</td></tr>";
+    $fila .= '<tr style="text-align:right;"><td width="160" style="text-align:left;">'.$paciente.'</td><td width="70" style="text-align:center;">'.$fecha_nac.'</td><td>'.$fecha_vac.'</td><td>'.$vacuna.'</td><td>'.$laboratorio.'</td><td>'.$lote.'</td><td>'.$dosis.'</td><td>'.$edad.'</td><td width="50" style="text-align:center;">'.$residencia.'</td></tr>';
   }
 
 $tabla = '<table style="font-size:8;" cellspacing="0" cellpadding="1" border="1"><thead>'.$cabecera.'</thead><tbody>'.$fila.'</tbody></table>';
