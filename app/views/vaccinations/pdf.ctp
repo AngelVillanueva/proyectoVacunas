@@ -722,7 +722,7 @@ foreach($report_data as $vaccination)
     $repe = chequea_repetido($vaccination['Patient']['nhc'], $para_chequeo);
     $repe ? $paciente = "Idem" : $paciente = fullname($vaccination);
     $repe ? $fecha_nac = "Idem" : $fecha_nac = formato_fecha($vaccination['Patient']['nacimiento']);
-    $repe ? $formato_repe = "background-color: #f8f8f8;" : $formato_repe = "";
+    $repe ? $formato_repe = "text-align: center;" : $formato_repe = "";
     $fecha_vac = formato_fecha($vaccination['Vaccination']['fecha']);
     $vacuna = $vaccination['Vaccine']['enfermedad'];
     $laboratorio = $vaccination['Vaccine']['laboratorio'];
