@@ -726,7 +726,7 @@ foreach($report_data as $vaccination)
     $vacuna = $vaccination['Vaccine']['enfermedad'];
     $laboratorio = $vaccination['Vaccine']['laboratorio'];
     $lote = $vaccination['Vaccine']['lote'];
-    $dosis = $vaccination['Vaccination']['dosis'];
+    $dosis = formatea_dosis($vaccination['Vaccination']['dosis'], $vacuna);
     $edad = calcula_edad($vaccination);
     $residencia = formatea_residencia($vaccination['Situation']['residente']);
 
@@ -813,6 +813,16 @@ function chequea_repetido($nuevo, $anterior){
 function formato_fecha($fecha) {
   $fecha = date('d-m-Y', strtotime($fecha));
   return $fecha;
+}
+
+function formatea_dosis($dosis, $vacuna) {
+  $array_ok = array('Dosis única', '1ª dosis', '2ª dosis', '3ª dosis', '4ª dosis', '5ª dosis');
+  if(in_array($dosis, $array_ok)) {
+    $dosis_f = $dosis;
+  } else {
+    $dosis_f = $dosis.'a';
+  }
+  return $dosis_f;
 }
 
 ?>
