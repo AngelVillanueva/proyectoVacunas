@@ -722,3 +722,4 @@
 2013-11-07 10:25:57 Notice: Notice (8): Undefined variable: data in [/Applications/MAMP/htdocs/pVacunas2/app/views/vaccinations/show_pdf.ctp, line 56]
 2013-11-07 11:28:27 Notice: Notice (8): Undefined variable: filar in [/Applications/MAMP/htdocs/pVacunas2/app/views/vaccinations/show_pdf.ctp, line 55]
 2013-11-07 11:28:27 Notice: Notice (8): Undefined variable: xmax in [/Applications/MAMP/htdocs/pVacunas2/app/vendors/tcpdf/tcpdf.php, line 21611]
+2013-11-12 17:56:50 Notice: Notice (8): Undefined variable: formato_repe in [/Applications/MAMP/htdocs/proyectoVacunas/app/views/vaccinations/pdf.ctp, line 736]

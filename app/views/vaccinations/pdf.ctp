@@ -722,15 +722,28 @@ foreach($report_data as $vaccination)
     $repe = chequea_repetido($vaccination['Patient']['nhc'], $para_chequeo);
     $repe ? $paciente = "Idem" : $paciente = fullname($vaccination);
     $repe ? $fecha_nac = "Idem" : $fecha_nac = formato_fecha($vaccination['Patient']['nacimiento']);
+    $repe ? $formato_repe = "background-color: #f8f8f8;" : $formato_repe = "";
     $fecha_vac = formato_fecha($vaccination['Vaccination']['fecha']);
     $vacuna = $vaccination['Vaccine']['enfermedad'];
     $laboratorio = $vaccination['Vaccine']['laboratorio'];
     $lote = $vaccination['Vaccine']['lote'];
     $dosis = formatea_dosis($vaccination['Vaccination']['dosis'], $vacuna);
-    $edad = calcula_edad($vaccination);
+    $edad = calcula_edad($vaccination) ? calcula_edad($vaccination) : "error en la edad";
+    !calcula_edad($vaccination) ? $formato_error = "color: #f00;" : $formato_error = "";
     $residencia = formatea_residencia($vaccination['Situation']['residente']);
 
-    $fila .= '<tr style="text-align:right;"><td width="160" style="text-align:left;">'.$paciente.'</td><td width="70" style="text-align:center;">'.$fecha_nac.'</td><td>'.$fecha_vac.'</td><td>'.$vacuna.'</td><td>'.$laboratorio.'</td><td>'.$lote.'</td><td>'.$dosis.'</td><td>'.$edad.'</td><td width="50" style="text-align:center;">'.$residencia.'</td></tr>';
+    $fila .=
+      '<tr style="text-align:right;">'
+        .'<td width="160" style="text-align:left;'.$formato_repe.'">'.$paciente.'</td>'
+        .'<td width="70" style="text-align:center;'.$formato_repe.'">'.$fecha_nac.'</td>'
+        .'<td>'.$fecha_vac.'</td>'
+        .'<td>'.$vacuna.'</td>'
+        .'<td>'.$laboratorio.'</td>'
+        .'<td>'.$lote.'</td>'
+        .'<td>'.$dosis.'</td>'
+        .'<td style="'.$formato_error.'">'.$edad.'</td>'
+        .'<td width="50" style="text-align:center;">'.$residencia.'</td>'
+      .'</tr>';
     $para_chequeo = $vaccination['Patient']['nhc'];
   }
 
@@ -784,7 +797,7 @@ function calcula_edad($vaccination) {
   $vacunado = new DateTime($fecha_vacunacion);
   $edad = $nace->diff($vacunado);
   $edad_formateada = formatea_edad($edad);
-  if($nace > $vacunado) { $edad_formateada = "error en la edad"; }
+  if($nace > $vacunado) { $edad_formateada = false; }
   return $edad_formateada;
 }
 
