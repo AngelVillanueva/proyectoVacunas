@@ -704,9 +704,9 @@ $tcpdf->writeHTML($imgjunta.$blankimg.$imgsescam, true, false, false, false, '')
 
 $title = '<p style="font-weight: bold; font-size: 40px; text-align: center; text-decoration: underline;">Hoja de declaración nominal de vacunaciones (Infantil)</p>';
 if($first_date && $second_date) {
-  $periodo = '<p>DE '.$first_date.' A '.$second_date.'</p>';
+  $periodo = '<p>DE: '.$first_date.' A '.$second_date.'</p>';
 } else $periodo = '';
-$subtitle = '<p><b>ZONA DE SALUD:</b> SANATORIO SANTA CRISTINA - <b>LOCALIDAD:</b> ALBACETE</p>'.$periodo.'<p></p>';
+$subtitle = '<p><b>ZONA DE SALUD:</b> CLÍNICA SANTA CRISTINA - <b>LOCALIDAD:</b> ALBACETE</p>'.$periodo.'<p></p>';
 $titulo = $title.$subtitle;
 $tcpdf->xfootertext = 'Página '.$tcpdf->getAliasNumPage().'/'.$tcpdf->getAliasNbPages();
 $tcpdf->writeHTML($titulo, true, false, false, false, '');
