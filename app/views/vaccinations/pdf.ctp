@@ -787,6 +787,7 @@ function fullname($vaccination) {
   $paciente = $vaccination['Patient']['apellido1'];
   $paciente .= ' '.$vaccination['Patient']['apellido2'];
   $paciente .= ', '.$vaccination['Patient']['nombre'];
+  $paciente .= $vaccination['Patient']['nhc'];
   return $paciente;
 }
 
