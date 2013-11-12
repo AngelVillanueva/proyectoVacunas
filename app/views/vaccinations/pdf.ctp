@@ -711,9 +711,9 @@ $titulo = $title.$subtitle;
 $tcpdf->xfootertext = 'Página '.$tcpdf->getAliasNumPage().'/'.$tcpdf->getAliasNbPages();
 $tcpdf->writeHTML($titulo, true, false, false, false, '');
 
-$columnas = '<td style="background-color:#f6cece;">Fecha vacuna</td><td style="background-color:#f6cece;">Vacuna</td><td style="background-color:#f6cece;">Laboratorio</td><td style="background-color:#f6cece;">Lote</td><td style="background-color:#f6cece;">Dosis</td><td style="background-color:#f6cece;">Edad</td>';
-$cabecera = '<tr style="font-weight:bold;"><td width="230" colspan="2" style="border-color:#fff;"></td><td colspan="6" style="background-color:#ECF6F9; font-weight:bold; text-align:center;">Vacunación</td><td width="50" style="border-color:#fff;"></td></tr>';
-$cabecera .= '<tr style="background-color:#ECF6F9; font-weight:bold;text-align:rigth;"><td width="160" style="text-align:left;">Paciente</td><td width="70" style="text-align:center;">Fecha nacimiento</td>'.$columnas.'<td width="50" style="text-align:center;">No residente</td></tr>';
+$columnas = '<td border="1" style="background-color:#f6cece;">Fecha vacuna</td><td border="1" style="background-color:#f6cece;">Vacuna</td><td border="1" style="background-color:#f6cece;">Laboratorio</td><td border="1" style="background-color:#f6cece;">Lote</td><td border="1" style="background-color:#f6cece;">Dosis</td><td border="1" style="background-color:#f6cece;">Edad</td>';
+$cabecera = '<tr style="font-weight:bold;"><td width="230" colspan="2" style="border-color:#fff;"></td><td border="1" colspan="6" style="background-color:#ECF6F9; font-weight:bold; text-align:center;">Vacunación</td><td width="50" style="border-color:#fff;"></td></tr>';
+$cabecera .= '<tr style="background-color:#ECF6F9; font-weight:bold;text-align:rigth;"><td border="1" width="160" style="text-align:left;">Paciente</td><td border="1" width="70" style="text-align:center;">Fecha nacimiento</td>'.$columnas.'<td border="1" width="50" style="text-align:center;">No residente</td></tr>';
 $fila = '';
 $para_chequeo = '';
 
@@ -734,20 +734,20 @@ foreach($report_data as $vaccination)
 
     $fila .=
       '<tr style="text-align:right;">'
-        .'<td width="160" style="text-align:left;'.$formato_repe.'">'.$paciente.'</td>'
-        .'<td width="70" style="text-align:center;'.$formato_repe.'">'.$fecha_nac.'</td>'
-        .'<td>'.$fecha_vac.'</td>'
-        .'<td>'.$vacuna.'</td>'
-        .'<td>'.$laboratorio.'</td>'
-        .'<td>'.$lote.'</td>'
-        .'<td>'.$dosis.'</td>'
-        .'<td style="'.$formato_error.'">'.$edad.'</td>'
-        .'<td width="50" style="text-align:center;">'.$residencia.'</td>'
+        .'<td border="1" width="160" style="text-align:left;'.$formato_repe.'">'.$paciente.'</td>'
+        .'<td border="1" width="70" style="text-align:center;'.$formato_repe.'">'.$fecha_nac.'</td>'
+        .'<td border="1">'.$fecha_vac.'</td>'
+        .'<td border="1">'.$vacuna.'</td>'
+        .'<td border="1">'.$laboratorio.'</td>'
+        .'<td border="1">'.$lote.'</td>'
+        .'<td border="1">'.$dosis.'</td>'
+        .'<td border="1" style="'.$formato_error.'">'.$edad.'</td>'
+        .'<td border="1" width="50" style="text-align:center;">'.$residencia.'</td>'
       .'</tr>';
     $para_chequeo = $vaccination['Patient']['nhc'];
   }
 
-$tabla = '<table style="font-size:8;" cellspacing="0" cellpadding="1" border="1"><thead>'.$cabecera.'</thead><tbody>'.$fila.'</tbody></table>';
+$tabla = '<table style="font-size:8;" cellspacing="0" cellpadding="1" border="0"><thead>'.$cabecera.'</thead><tbody>'.$fila.'</tbody></table>';
 
 $html = <<<EOD
 $tabla
@@ -785,7 +785,7 @@ return $anio_dif;
 
 function fullname($vaccination) {
   $paciente = $vaccination['Patient']['apellido1'];
-  $paciente .= ' '.$vaccination['Patient']['apellido1'];
+  $paciente .= ' '.$vaccination['Patient']['apellido2'];
   $paciente .= ', '.$vaccination['Patient']['nombre'];
   return $paciente;
 }
