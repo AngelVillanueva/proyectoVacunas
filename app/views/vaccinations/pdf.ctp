@@ -711,13 +711,10 @@ $titulo = $title.$subtitle;
 $tcpdf->xfootertext = 'Página '.$tcpdf->getAliasNumPage().'/'.$tcpdf->getAliasNbPages();
 $tcpdf->writeHTML($titulo, true, false, false, false, '');
 
-$cabecera = '<tr style="background-color:#ECF6F9; font-size:7; font-weight: bold; text-align: center;"><th style="background-color:#FFFFFF" colspan="4" rowspan="2" width="190"></th><th width="35">0 meses</th><th width="35">1 mes</th><th width="84" colspan="2">2 meses</th><th width="84" colspan="2">4 meses</th><th width="84" colspan="2">6 meses</th><th width="56" colspan="2">15 meses</th><th width="84" colspan="2">18 meses</th><th width="72" colspan="2">6 años</th><th width="36">11 años</th></tr>';
-$cabecera = $cabecera.'<tr style="background-color:#ECF6F9; font-size:6; text-align: center;"><th>Hepatitis B</th><th>Hepatitis B</th><th>Polio-DTP-HiB</th><th>Meningitis C</th><th>Polio-DTP-HiB</th><th>Meningitis C</th><th>Polio-DTP-HiB</th><th>Hepatitis B</th><th>T. Vírica</th><th>Varicela</th><th>Polio-DTP-HiB</th><th>Meningitis C</th><th>DTP</th><th>Triple Vírica</th><th>Varicela</th></tr>';
-$fila = '';
-
 $columnas = '<td style="background-color:#f6cece;">Fecha</td><td style="background-color:#f6cece;">Vacuna</td><td style="background-color:#f6cece;">Laboratorio</td><td style="background-color:#f6cece;">Lote</td><td style="background-color:#f6cece;">Dosis</td><td style="background-color:#f6cece;">Edad</td>';
-$cabecera = '<tr style="font-weight:bold;"><td width="230" colspan="2"></td><td colspan="6" style="background-color:#ECF6F9; font-weight:bold; text-align:center;">Vacunación</td><td width="50"></td></tr>';
+$cabecera = '<tr style="font-weight:bold;"><td width="230" colspan="2" style="border-color:#fff;"></td><td colspan="6" style="background-color:#ECF6F9; font-weight:bold; text-align:center;">Vacunación</td><td width="50" style="border-color:#fff;"></td></tr>';
 $cabecera .= '<tr style="background-color:#ECF6F9; font-weight:bold;text-align:rigth;"><td width="160" style="text-align:left;">Paciente</td><td width="70" style="text-align:center;">Fecha nacimiento</td>'.$columnas.'<td width="50" style="text-align:center;">No residente</td></tr>';
+$fila = '';
 
 foreach($report_data as $vaccination)
   {
