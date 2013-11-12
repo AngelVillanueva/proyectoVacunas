@@ -693,6 +693,63 @@ EOD;
 
 break;
 
+case 7:
+
+//INFORME DE TIPO 7 (Calendario Infantil obligatorio)[nuevo por paciente]
+// ----------------------------------------------------------------------
+$imgjunta = '<img src="img/LogoJCCCM.jpg" height="60" width="86" />';
+$blankimg = '<img src="'.K_BLANK_IMAGE.'" width="580" height="60" />';
+$imgsescam = '<img src="img/LogoSescam.png" height="60" width="70" />';
+$tcpdf->writeHTML($imgjunta.$blankimg.$imgsescam, true, false, false, false, '');
+
+$title = '<p style="font-weight: bold; font-size: 40px; text-align: center; text-decoration: underline;">Hoja de declaración nominal de vacunaciones (Infantil)</p>';
+if($first_date && $second_date) {
+  $periodo = '<p>DE '.$first_date.' A '.$second_date.'</p>';
+} else $periodo = '';
+$subtitle = '<p><b>ZONA DE SALUD:</b> SANATORIO SANTA CRISTINA - <b>LOCALIDAD:</b> ALBACETE</p>'.$periodo.'<p></p>';
+$titulo = $title.$subtitle;
+$tcpdf->xfootertext = 'Página '.$tcpdf->getAliasNumPage().'/'.$tcpdf->getAliasNbPages();
+$tcpdf->writeHTML($titulo, true, false, false, false, '');
+
+$cabecera = '<tr style="background-color:#ECF6F9; font-size:7; font-weight: bold; text-align: center;"><th style="background-color:#FFFFFF" colspan="4" rowspan="2" width="190"></th><th width="35">0 meses</th><th width="35">1 mes</th><th width="84" colspan="2">2 meses</th><th width="84" colspan="2">4 meses</th><th width="84" colspan="2">6 meses</th><th width="56" colspan="2">15 meses</th><th width="84" colspan="2">18 meses</th><th width="72" colspan="2">6 años</th><th width="36">11 años</th></tr>';
+$cabecera = $cabecera.'<tr style="background-color:#ECF6F9; font-size:6; text-align: center;"><th>Hepatitis B</th><th>Hepatitis B</th><th>Polio-DTP-HiB</th><th>Meningitis C</th><th>Polio-DTP-HiB</th><th>Meningitis C</th><th>Polio-DTP-HiB</th><th>Hepatitis B</th><th>T. Vírica</th><th>Varicela</th><th>Polio-DTP-HiB</th><th>Meningitis C</th><th>DTP</th><th>Triple Vírica</th><th>Varicela</th></tr>';
+$fila = '';
+
+$columnas = '<th>Paciente</th><th>Fecha nacimiento</th><th>Vacunación</th><th>No residente</th>';
+$cabecera = '<tr style="background-color:#ECF6F9; font-weight:bold; text-align:center;">'.$columnas.'</tr>';
+
+foreach($report_data as $vaccination)
+  {
+    $paciente = fullname($vaccination);
+    $fecha_nac = $vaccination['Patient']['nacimiento'];
+    $fecha_vac = $vaccination['Vaccination']['fecha'];
+    $vacuna = $vaccination['Vaccine']['enfermedad'];
+    $laboratorio = $vaccination['Vaccine']['laboratorio'];
+    $lote = $vaccination['Vaccine']['lote'];
+    $dosis = $vaccination['Vaccination']['dosis'];
+    $edad = new DateTime($vaccination['Patient']['nacimiento']);
+    $now = new DateTime();
+    $edad = calcula_edad($vaccination);
+    $edad_en_meses = ceil(($edad->format('%a') + 0) / 30)." meses";
+    $edad_p = $edad->format('%a')+0 >=365 ? $edad->format('%y años') : $edad_en_meses;
+    $residente = $vaccination['Situation']['residente'];
+    $noresidente = !$residente ? "x" : "";
+
+    $fila .= "<tr><td>".$paciente."</td><td>".$fecha_nac."</td><td>".$edad_p."</td><td>".$fecha_vac."</td></tr>";
+  }
+
+$tabla = '<table style="font-size:8;" cellspacing="0" cellpadding="1" border="1"><thead>'.$cabecera.'</thead><tbody>'.$fila.'</tbody></table>';
+
+$html = <<<EOD
+$tabla
+EOD;
+
+$tcpdf->writeHTML($html, true, false, false, false, '');
+
+//--------------------------------------------------------------
+
+break;
+
 }
 
 // ... 
@@ -715,6 +772,22 @@ $dia_dif = $diaV - $diaN;
 if ($dia_dif < 0 || $mes_dif < 0)
 $anio_dif--;
 return $anio_dif;
+}
+
+function fullname($vaccination) {
+  $paciente = $vaccination['Patient']['apellido1'];
+  $paciente .= ' '.$vaccination['Patient']['apellido1'];
+  $paciente .= ', '.$vaccination['Patient']['nombre'];
+  return $paciente;
+}
+
+function calcula_edad($vaccination) {
+  $fecha_nacimiento = $vaccination['Patient']['nacimiento'];
+  $fecha_vacunacion = $vaccination['Vaccination']['fecha'];
+  $nace = new DateTime($fecha_nacimiento);
+  $vacunado = new DateTime($fecha_vacunacion);
+  $edad = $nace->diff($vacunado);
+  return $edad;
 }
 
 ?>
