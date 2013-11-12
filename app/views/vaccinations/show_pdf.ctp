@@ -27,7 +27,7 @@ $imgjunta = '<img src="'.K_BLANK_IMAGE.'" width="650" height="70" />'.'<img src=
 
 $tcpdf->writeHTML($imgjunta, true, false, true, false, '');
 
-$title = '<p style="font-size: 40px; font-weight: bold; text-align: center; text-decoration: underline;">'.$report_name.'</p><p></p>';
+$title = '<p style="font-size: 40px; font-weight: bold; text-align: center; text-decoration: underline;">'.$report_name.' '.count($report_data).'</p><p></p>';
 $subtitle = '<p><b>LOCALIDAD:</b> ALBACETE - <b>ZONA DE SALUD</b>: SANATORIO SANTA CRISTINA</p><p></p>';
 $titulo = $title;
 $tcpdf->xfootertext = 'Página '.$tcpdf->getAliasNumPage().'/'.$tcpdf->getAliasNbPages();
@@ -49,10 +49,11 @@ foreach($report_data as $vaccination) {
     $dosis = $vaccination['Vaccination']['dosis'];
     $vacuna = $vaccination['Vaccine']['nombre'];
 
-    $fila .= '<tr nobr="true" style="font-size: 7; text-align: center;"><td style="font-size: 8;text-align:left;" width="140"> '.$apellido1.' '.$apellido2.', '.$nombre.' </td><td width="85" style="font-size="8">'.$fechan.'</td><td width="85">'.$fechav.'</td><td width="85">'.$enfermedad.'</td><td width="85">'.$dosis.'</td><td width="90">'.$vacuna.'</td><td width="90">'.$laboratorio.'</td><td width="90">'.$lote.'</td></tr>';
+    $fila .= '<tr nobr="true" style="text-align: center;"><td style="font-size: 8;text-align:left;" width="140"> '.$apellido1.' '.$apellido2.', '.$nombre.' </td><td width="85">'.$fechan.'</td><td width="85">'.$fechav.'</td><td width="85">'.$enfermedad.'</td><td width="85">'.$dosis.'</td><td width="90">'.$vacuna.'</td><td width="90">'.$laboratorio.'</td><td width="90">'.$lote.'</td></tr>';
 }
 
 $tabla = '<table cellspacing="0" cellpadding="1" border="1"><thead>'.$cabecera.'</thead><tbody>'.$fila.'</tbody></table>';
+
 $html = <<<EOD
 $tabla
 EOD;
