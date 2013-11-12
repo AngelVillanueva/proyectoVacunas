@@ -784,6 +784,7 @@ function calcula_edad($vaccination) {
   $vacunado = new DateTime($fecha_vacunacion);
   $edad = $nace->diff($vacunado);
   $edad_formateada = formatea_edad($edad);
+  if($nace > $vacunado) { $edad_formateada = "error en la edad"; }
   return $edad_formateada;
 }
 
