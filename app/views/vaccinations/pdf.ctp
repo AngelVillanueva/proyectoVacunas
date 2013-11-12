@@ -715,11 +715,13 @@ $columnas = '<td style="background-color:#f6cece;">Fecha</td><td style="backgrou
 $cabecera = '<tr style="font-weight:bold;"><td width="230" colspan="2" style="border-color:#fff;"></td><td colspan="6" style="background-color:#ECF6F9; font-weight:bold; text-align:center;">Vacunación</td><td width="50" style="border-color:#fff;"></td></tr>';
 $cabecera .= '<tr style="background-color:#ECF6F9; font-weight:bold;text-align:rigth;"><td width="160" style="text-align:left;">Paciente</td><td width="70" style="text-align:center;">Fecha nacimiento</td>'.$columnas.'<td width="50" style="text-align:center;">No residente</td></tr>';
 $fila = '';
+$para_chequeo = '';
 
 foreach($report_data as $vaccination)
   {
-    $paciente = fullname($vaccination);
-    $fecha_nac = $vaccination['Patient']['nacimiento'];
+    $repe = chequea_repetido($vaccination['Patient']['nhc'], $para_chequeo);
+    $repe ? $paciente = "Idem" : $paciente = fullname($vaccination);
+    $repe ? $fecha_nac = "Idem" : $fecha_nac = $vaccination['Patient']['nacimiento'];
     $fecha_vac = $vaccination['Vaccination']['fecha'];
     $vacuna = $vaccination['Vaccine']['enfermedad'];
     $laboratorio = $vaccination['Vaccine']['laboratorio'];
@@ -729,6 +731,7 @@ foreach($report_data as $vaccination)
     $residencia = formatea_residencia($vaccination['Situation']['residente']);
 
     $fila .= '<tr style="text-align:right;"><td width="160" style="text-align:left;">'.$paciente.'</td><td width="70" style="text-align:center;">'.$fecha_nac.'</td><td>'.$fecha_vac.'</td><td>'.$vacuna.'</td><td>'.$laboratorio.'</td><td>'.$lote.'</td><td>'.$dosis.'</td><td>'.$edad.'</td><td width="50" style="text-align:center;">'.$residencia.'</td></tr>';
+    $para_chequeo = $vaccination['Patient']['nhc'];
   }
 
 $tabla = '<table style="font-size:8;" cellspacing="0" cellpadding="1" border="1"><thead>'.$cabecera.'</thead><tbody>'.$fila.'</tbody></table>';
@@ -793,6 +796,11 @@ function formatea_edad($edad) {
 function formatea_residencia($situacion) {
   $no_residente = !$situacion ? "x" : "";
   return $no_residente;
+}
+
+function chequea_repetido($nuevo, $anterior){
+  $nuevo == $anterior ? $repetido = true : $repetido = false;
+  return $repetido;
 }
 
 ?>
