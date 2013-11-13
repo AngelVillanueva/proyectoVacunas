@@ -215,59 +215,59 @@ $(document).ready(function(){
 			else {
 				if($('input#enfermedad').parent('div').hasClass('hidden')) {} else {$('input#enfermedad').parent('div').slideUp().addClass('hidden').removeClass('required');}
 			}
-			if($('#form_id').text() == '2') {
-				if($(this).val() == 'Hepatitis B') {
-					if($('#VaccinationActualizacion').val() == '0') { ocultos = Array(2,3,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20); defecto = 0; } else { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,18,19,20); defecto = 15;}
-					ocultarValoresSelector('#VaccinationDosis', defecto, ocultos);
-				}
-				if($(this).val() == 'Pentavalente') {
-					$('#VaccinationActualizacion').val('0');
-					if($('#VaccinationActualizacion').val() == '0') { ocultos = Array(0,1,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20); defecto = 2;} else { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19); defecto = 20;}
-					ocultarValoresSelector('#VaccinationDosis', defecto, ocultos);
-				}
-				if($(this).val() == 'Meningitis C') {
-					if($('#VaccinationActualizacion').val() == '0') { ocultos = Array(0,1,4,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20); defecto = 2;} else { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,17,18,19,20); defecto = 15;}
-					ocultarValoresSelector('#VaccinationDosis', defecto, ocultos);
-				}
-				if($(this).val() == 'Triple Vírica') {
-					if($('#VaccinationActualizacion').val() == '0') { ocultos = Array(0,1,2,3,4,6,8,9,10,11,12,13,14,15,16,17,18,19,20); defecto = 5;} else { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,17,18,19,20); defecto = 15;}
-					ocultarValoresSelector('#VaccinationDosis', defecto, ocultos);
-				}
-				if($(this).val() == 'Triple Bacteriana') {
-					$('#VaccinationActualizacion').val('0');
-					if($('#VaccinationActualizacion').val() == '0') { ocultos = Array(0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,17,18,19,20); defecto = 7;} else { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19); defecto = 20;}
-					ocultarValoresSelector('#VaccinationDosis', defecto, ocultos);
-				}
-				if($(this).val() == 'Varicela') {
-					if($('#VaccinationActualizacion').val() == '0') { ocultos = Array(0,1,2,3,4,5,6,7,8,11,12,13,14,15,16,17,18,19,20); defecto = 9;} else { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,17,18,19,20); defecto = 15;}
-					ocultarValoresSelector('#VaccinationDosis', defecto, ocultos);
-				}
-				if($(this).val() == 'Difteria-Tétanos') {
-					$('#VaccinationActualizacion').val('0');
-					if($('#VaccinationActualizacion').val() == '0') { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,12,13,14,15,16,17,18,19,20); defecto = 11;} else { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19); defecto = 20;}
-					ocultarValoresSelector('#VaccinationDosis', defecto, ocultos);
-				}
-				if($(this).val() == 'Papiloma') {
-					$('#VaccinationActualizacion').val('0');
-					if($('#VaccinationActualizacion').val() == '0') { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,15,16,17,18,19,20); defecto = 12;} else { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19); defecto = 20;}
-					ocultarValoresSelector('#VaccinationDosis', defecto, ocultos);
-				}
-				if($(this).val() == 'Polio') {
-					$('#VaccinationActualizacion').val('1');
-					if($('#VaccinationActualizacion').val() == '0') { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20); defecto = 20;} else { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,19,20); defecto = 15;}
-					ocultarValoresSelector('#VaccinationDosis', defecto, ocultos);
-				}
-				if($(this).val() == 'DTP/Td') {
-					$('#VaccinationActualizacion').val('1');
-					if($('#VaccinationActualizacion').val() == '0') { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20); defecto = 20;} else { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,20); defecto = 15;}
-					ocultarValoresSelector('#VaccinationDosis', defecto, ocultos);
-				}
-				if($(this).val() == 'Hib') {
-					$('#VaccinationActualizacion').val('1');
-					if($('#VaccinationActualizacion').val() == '0') { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20); defecto = 20;} else { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,19,20); defecto = 15;}
-					ocultarValoresSelector('#VaccinationDosis', defecto, ocultos);
-				}
-			}
+			// if($('#form_id').text() == '2') {
+			// 	if($(this).val() == 'Hepatitis B') {
+			// 		if($('#VaccinationActualizacion').val() == '0') { ocultos = Array(2,3,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20); defecto = 0; } else { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,18,19,20); defecto = 15;}
+			// 		ocultarValoresSelector('#VaccinationDosis', defecto, ocultos);
+			// 	}
+			// 	if($(this).val() == 'Pentavalente') {
+			// 		$('#VaccinationActualizacion').val('0');
+			// 		if($('#VaccinationActualizacion').val() == '0') { ocultos = Array(0,1,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20); defecto = 2;} else { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19); defecto = 20;}
+			// 		ocultarValoresSelector('#VaccinationDosis', defecto, ocultos);
+			// 	}
+			// 	if($(this).val() == 'Meningitis C') {
+			// 		if($('#VaccinationActualizacion').val() == '0') { ocultos = Array(0,1,4,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20); defecto = 2;} else { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,17,18,19,20); defecto = 15;}
+			// 		ocultarValoresSelector('#VaccinationDosis', defecto, ocultos);
+			// 	}
+			// 	if($(this).val() == 'Triple Vírica') {
+			// 		if($('#VaccinationActualizacion').val() == '0') { ocultos = Array(0,1,2,3,4,6,8,9,10,11,12,13,14,15,16,17,18,19,20); defecto = 5;} else { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,17,18,19,20); defecto = 15;}
+			// 		ocultarValoresSelector('#VaccinationDosis', defecto, ocultos);
+			// 	}
+			// 	if($(this).val() == 'Triple Bacteriana') {
+			// 		$('#VaccinationActualizacion').val('0');
+			// 		if($('#VaccinationActualizacion').val() == '0') { ocultos = Array(0,1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,17,18,19,20); defecto = 7;} else { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19); defecto = 20;}
+			// 		ocultarValoresSelector('#VaccinationDosis', defecto, ocultos);
+			// 	}
+			// 	if($(this).val() == 'Varicela') {
+			// 		if($('#VaccinationActualizacion').val() == '0') { ocultos = Array(0,1,2,3,4,5,6,7,8,11,12,13,14,15,16,17,18,19,20); defecto = 9;} else { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,17,18,19,20); defecto = 15;}
+			// 		ocultarValoresSelector('#VaccinationDosis', defecto, ocultos);
+			// 	}
+			// 	if($(this).val() == 'Difteria-Tétanos') {
+			// 		$('#VaccinationActualizacion').val('0');
+			// 		if($('#VaccinationActualizacion').val() == '0') { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,12,13,14,15,16,17,18,19,20); defecto = 11;} else { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19); defecto = 20;}
+			// 		ocultarValoresSelector('#VaccinationDosis', defecto, ocultos);
+			// 	}
+			// 	if($(this).val() == 'Papiloma') {
+			// 		$('#VaccinationActualizacion').val('0');
+			// 		if($('#VaccinationActualizacion').val() == '0') { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,15,16,17,18,19,20); defecto = 12;} else { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19); defecto = 20;}
+			// 		ocultarValoresSelector('#VaccinationDosis', defecto, ocultos);
+			// 	}
+			// 	if($(this).val() == 'Polio') {
+			// 		$('#VaccinationActualizacion').val('1');
+			// 		if($('#VaccinationActualizacion').val() == '0') { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20); defecto = 20;} else { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,19,20); defecto = 15;}
+			// 		ocultarValoresSelector('#VaccinationDosis', defecto, ocultos);
+			// 	}
+			// 	if($(this).val() == 'DTP/Td') {
+			// 		$('#VaccinationActualizacion').val('1');
+			// 		if($('#VaccinationActualizacion').val() == '0') { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20); defecto = 20;} else { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,20); defecto = 15;}
+			// 		ocultarValoresSelector('#VaccinationDosis', defecto, ocultos);
+			// 	}
+			// 	if($(this).val() == 'Hib') {
+			// 		$('#VaccinationActualizacion').val('1');
+			// 		if($('#VaccinationActualizacion').val() == '0') { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20); defecto = 20;} else { ocultos = Array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,19,20); defecto = 15;}
+			// 		ocultarValoresSelector('#VaccinationDosis', defecto, ocultos);
+			// 	}
+			// }
 			if($('#form_id').text() == '4') {
 				if($(this).val() == 'HVB') {
 					ocultos = Array(3,4); defecto = 0;
