@@ -68,7 +68,7 @@
 <?php
 	if($form_id == 2 || $form_id == 4 || $form_id == 5) {
 		if($form_id == 2) {
-			echo $this->Form->input('Vaccination.actualizacion', array('label'=>'¿Es una actualización del calendario?','options'=>array('No', 'Sí')));
+			//echo $this->Form->input('Vaccination.actualizacion', array('label'=>'¿Es una actualización del calendario?','options'=>array('No', 'Sí')));
 		}
 		echo $this->Form->input('Vaccination.dosis', array('options'=>$dosis));
 		echo $this->Form->input('VaccinationDosisCopia', array('div' => 'hidden', 'options' => $dosis));
