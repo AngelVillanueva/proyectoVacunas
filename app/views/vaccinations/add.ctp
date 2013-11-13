@@ -7,7 +7,7 @@
 		'Hepatitis B'=>'Hepatitis B', 'Pentavalente'=>'Pentavalente', 'Meningitis C'=>'Meningitis C', 'Triple Vírica'=>'Triple Vírica', 'Triple Bacteriana'=>'Triple Bacteriana', 'Varicela'=>'Varicela', 'Difteria-Tétanos'=>'Difteria-Tétanos', 'Papiloma'=>'Papiloma', 'Polio'=>'Polio', 'DTP/Td'=>'DTP/Td', 'Hib' => 'Hib'
 		);
 		$dosis = array(
-		'Recién nacido'=>'Recién nacido', '1 mes'=>'1 mes', '2 meses'=>'2 meses', '4 meses'=>'4 meses', '6 meses'=>'6 meses', '12 meses'=>'12 meses', '18 meses'=>'18 meses', '4 años'=>'4 años', '6 años'=>'6 años', '11 años 1'=>'11 años 1ª dosis', '11 años 2'=>'11 años 2ª dosis', '13-14 años'=>'13-14 años', '14 años 1'=>'14 años 1ª dosis', '14 años 2'=>'14 años 2ª dosis', '14 años 3'=>'14 años 3ª dosis', '1ª dosis'=>'1ª dosis', '2ª dosis'=>'2ª dosis', '3ª dosis'=>'3ª dosis', '4ª dosis'=>'4ª dosis', '5ª dosis'=>'5ª dosis', 'Dosis única'=>'Dosis única'
+		'1ª dosis'=>'1ª dosis', '2ª dosis'=>'2ª dosis', '3ª dosis'=>'3ª dosis', '4ª dosis'=>'4ª dosis', '5ª dosis'=>'5ª dosis'
 		);
 	} else if($form_id == 4) {			// enfermedades adultos
 		$enfermedades = array(
