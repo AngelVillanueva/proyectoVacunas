@@ -4,10 +4,10 @@
 	// definición de enfermedades listadas en el selector dependiendo del tipo de vacuna
 	if($form_id == 2) {					// enfermedades y dosis del calendario infantil obligatorio
 		$enfermedades = array(
-		'Hepatitis B'=>'Hepatitis B', 'Pentavalente'=>'Pentavalente', 'Meningitis C'=>'Meningitis C', 'Triple Vírica'=>'Triple Vírica', 'Triple Bacteriana'=>'Triple Bacteriana', 'Varicela'=>'Varicela', 'Difteria-Tétanos'=>'Difteria-Tétanos', 'Papiloma'=>'Papiloma', 'Polio'=>'Polio', 'DTP/Td'=>'DTP/Td', 'Hib' => 'Hib'
+		'Hepatitis B'=>'Hepatitis B', 'Pentavalente'=>'Pentavalente', 'Meningitis C'=>'Meningitis C', 'Triple Vírica'=>'Triple Vírica', 'Varicela'=>'Varicela', 'Difteria-Tétanos'=>'Difteria-Tétanos', 'Papiloma'=>'Papiloma', 'Polio'=>'Polio', 'DTP/Td'=>'DTP/Td', 'Hib' => 'Hib'
 		);
 		$dosis = array(
-		'1ª dosis'=>'1ª dosis', '2ª dosis'=>'2ª dosis', '3ª dosis'=>'3ª dosis', '4ª dosis'=>'4ª dosis', '5ª dosis'=>'5ª dosis'
+		'1ª dosis'=>'1ª dosis', '2ª dosis'=>'2ª dosis', '3ª dosis'=>'3ª dosis', '4ª dosis'=>'4ª dosis', '5ª dosis'=>'5ª dosis', '6ª dosis'=>'6ª dosis'
 		);
 	} else if($form_id == 4) {			// enfermedades adultos
 		$enfermedades = array(
