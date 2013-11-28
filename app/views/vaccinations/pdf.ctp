@@ -716,6 +716,7 @@ $cabecera = '<tr style="font-weight:bold;"><td width="230" colspan="2" style="bo
 $cabecera .= '<tr style="background-color:#ECF6F9; font-weight:bold;text-align:rigth;"><td border="1" width="160" style="text-align:left;">Paciente</td><td border="1" width="70" style="text-align:center;">Fecha nacimiento</td>'.$columnas.'<td border="1" width="50" style="text-align:center;">No residente</td></tr>';
 $fila = '';
 $para_chequeo = '';
+$contador = 0;
 
 foreach($report_data as $vaccination)
   {
@@ -732,6 +733,8 @@ foreach($report_data as $vaccination)
     !calcula_edad($vaccination) ? $formato_error = "color: #f00;" : $formato_error = "";
     $residencia = formatea_residencia($vaccination['Situation']['residente']);
 
+    if(!$repe && $contador > 0) { $fila .= '<tr><td colspan="9"></td></tr>'; }
+
     $fila .=
       '<tr style="text-align:right;">'
         .'<td border="1" width="160" style="text-align:left;'.$formato_repe.'">'.$paciente.'</td>'
@@ -745,9 +748,10 @@ foreach($report_data as $vaccination)
         .'<td border="1" width="50" style="text-align:center;">'.$residencia.'</td>'
       .'</tr>';
     $para_chequeo = $vaccination['Patient']['nhc'];
+    $contador ++;
   }
 
-$tabla = '<table style="font-size:8;" cellspacing="0" cellpadding="1" border="0"><thead>'.$cabecera.'</thead><tbody>'.$fila.'</tbody></table>';
+$tabla = '<table nobr="true" style="font-size:8;" cellspacing="0" cellpadding="1" border="0"><thead>'.$cabecera.'</thead><tbody>'.$fila.'</tbody></table>';
 
 $html = <<<EOD
 $tabla
